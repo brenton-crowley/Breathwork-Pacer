@@ -13,7 +13,7 @@ struct Breathwork_PacerApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CoreDataBoilerPlateView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

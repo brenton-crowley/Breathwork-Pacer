@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		840FE2AF27D5D28A00B574C4 /* Breathwork_PacerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840FE2AE27D5D28A00B574C4 /* Breathwork_PacerApp.swift */; };
-		840FE2B127D5D28A00B574C4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840FE2B027D5D28A00B574C4 /* ContentView.swift */; };
+		840FE2B127D5D28A00B574C4 /* CoreDataBoilerPlateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840FE2B027D5D28A00B574C4 /* CoreDataBoilerPlateView.swift */; };
 		840FE2B327D5D28A00B574C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 840FE2B227D5D28A00B574C4 /* Assets.xcassets */; };
 		840FE2B627D5D28A00B574C4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 840FE2B527D5D28A00B574C4 /* Preview Assets.xcassets */; };
 		840FE2B827D5D28A00B574C4 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840FE2B727D5D28A00B574C4 /* Persistence.swift */; };
@@ -18,7 +18,7 @@
 /* Begin PBXFileReference section */
 		840FE2AB27D5D28A00B574C4 /* Breathwork Pacer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Breathwork Pacer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		840FE2AE27D5D28A00B574C4 /* Breathwork_PacerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Breathwork_PacerApp.swift; sourceTree = "<group>"; };
-		840FE2B027D5D28A00B574C4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		840FE2B027D5D28A00B574C4 /* CoreDataBoilerPlateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataBoilerPlateView.swift; sourceTree = "<group>"; };
 		840FE2B227D5D28A00B574C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		840FE2B527D5D28A00B574C4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		840FE2B727D5D28A00B574C4 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -40,6 +40,7 @@
 			isa = PBXGroup;
 			children = (
 				840FE2AD27D5D28A00B574C4 /* Breathwork Pacer */,
+				840FE2AE27D5D28A00B574C4 /* Breathwork_PacerApp.swift */,
 				840FE2AC27D5D28A00B574C4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,11 +56,10 @@
 		840FE2AD27D5D28A00B574C4 /* Breathwork Pacer */ = {
 			isa = PBXGroup;
 			children = (
-				840FE2AE27D5D28A00B574C4 /* Breathwork_PacerApp.swift */,
-				840FE2B027D5D28A00B574C4 /* ContentView.swift */,
+				840FE2C327D5D29C00B574C4 /* Views */,
+				840FE2C227D5D29800B574C4 /* ViewModels */,
+				840FE2C127D5D29400B574C4 /* Data */,
 				840FE2B227D5D28A00B574C4 /* Assets.xcassets */,
-				840FE2B727D5D28A00B574C4 /* Persistence.swift */,
-				840FE2B927D5D28A00B574C4 /* Breathwork_Pacer.xcdatamodeld */,
 				840FE2B427D5D28A00B574C4 /* Preview Content */,
 			);
 			path = "Breathwork Pacer";
@@ -71,6 +71,54 @@
 				840FE2B527D5D28A00B574C4 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		840FE2C127D5D29400B574C4 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				840FE2C627D5D2C200B574C4 /* Core Data */,
+				840FE2C527D5D2AD00B574C4 /* Models */,
+				840FE2C427D5D2A300B574C4 /* JSON */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		840FE2C227D5D29800B574C4 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		840FE2C327D5D29C00B574C4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				840FE2B027D5D28A00B574C4 /* CoreDataBoilerPlateView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		840FE2C427D5D2A300B574C4 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
+		840FE2C527D5D2AD00B574C4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		840FE2C627D5D2C200B574C4 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				840FE2B927D5D28A00B574C4 /* Breathwork_Pacer.xcdatamodeld */,
+				840FE2B727D5D28A00B574C4 /* Persistence.swift */,
+			);
+			path = "Core Data";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,7 +193,7 @@
 			files = (
 				840FE2BB27D5D28A00B574C4 /* Breathwork_Pacer.xcdatamodeld in Sources */,
 				840FE2B827D5D28A00B574C4 /* Persistence.swift in Sources */,
-				840FE2B127D5D28A00B574C4 /* ContentView.swift in Sources */,
+				840FE2B127D5D28A00B574C4 /* CoreDataBoilerPlateView.swift in Sources */,
 				840FE2AF27D5D28A00B574C4 /* Breathwork_PacerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
