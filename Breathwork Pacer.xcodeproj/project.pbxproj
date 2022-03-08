@@ -17,6 +17,7 @@
 		848EFBBE27D7126C00F1D243 /* Enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848EFBBD27D7126C00F1D243 /* Enumerations.swift */; };
 		848EFBC127D7153500F1D243 /* BreathStep+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848EFBBF27D7153500F1D243 /* BreathStep+CoreDataClass.swift */; };
 		848EFBC227D7153500F1D243 /* BreathStep+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848EFBC027D7153500F1D243 /* BreathStep+CoreDataProperties.swift */; };
+		848EFBC527D7218800F1D243 /* BreathStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848EFBC427D7218800F1D243 /* BreathStepView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		848EFBBD27D7126C00F1D243 /* Enumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Enumerations.swift; path = Enumerations/Enumerations.swift; sourceTree = "<group>"; };
 		848EFBBF27D7153500F1D243 /* BreathStep+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BreathStep+CoreDataClass.swift"; sourceTree = "<group>"; };
 		848EFBC027D7153500F1D243 /* BreathStep+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BreathStep+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		848EFBC427D7218800F1D243 /* BreathStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathStepView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 		840FE2C327D5D29C00B574C4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				848EFBC327D7217B00F1D243 /* BreathStep */,
 				840FE2B027D5D28A00B574C4 /* CoreDataBoilerPlateView.swift */,
 				848EFBB727D711AC00F1D243 /* BreathSetView.swift */,
 			);
@@ -131,6 +134,14 @@
 				840FE2B727D5D28A00B574C4 /* Persistence.swift */,
 			);
 			path = "Core Data";
+			sourceTree = "<group>";
+		};
+		848EFBC327D7217B00F1D243 /* BreathStep */ = {
+			isa = PBXGroup;
+			children = (
+				848EFBC427D7218800F1D243 /* BreathStepView.swift */,
+			);
+			path = BreathStep;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,6 +219,7 @@
 				840FE2B827D5D28A00B574C4 /* Persistence.swift in Sources */,
 				848EFBC227D7153500F1D243 /* BreathStep+CoreDataProperties.swift in Sources */,
 				840FE2B127D5D28A00B574C4 /* CoreDataBoilerPlateView.swift in Sources */,
+				848EFBC527D7218800F1D243 /* BreathStepView.swift in Sources */,
 				840FE2AF27D5D28A00B574C4 /* Breathwork_PacerApp.swift in Sources */,
 				848EFBC127D7153500F1D243 /* BreathStep+CoreDataClass.swift in Sources */,
 				848EFBBE27D7126C00F1D243 /* Enumerations.swift in Sources */,
