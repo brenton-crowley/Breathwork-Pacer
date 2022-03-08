@@ -13,6 +13,10 @@
 		840FE2B627D5D28A00B574C4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 840FE2B527D5D28A00B574C4 /* Preview Assets.xcassets */; };
 		840FE2B827D5D28A00B574C4 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840FE2B727D5D28A00B574C4 /* Persistence.swift */; };
 		840FE2BB27D5D28A00B574C4 /* Breathwork_Pacer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 840FE2B927D5D28A00B574C4 /* Breathwork_Pacer.xcdatamodeld */; };
+		848EFBB827D711AC00F1D243 /* BreathSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848EFBB727D711AC00F1D243 /* BreathSetView.swift */; };
+		848EFBBE27D7126C00F1D243 /* Enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848EFBBD27D7126C00F1D243 /* Enumerations.swift */; };
+		848EFBC127D7153500F1D243 /* BreathStep+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848EFBBF27D7153500F1D243 /* BreathStep+CoreDataClass.swift */; };
+		848EFBC227D7153500F1D243 /* BreathStep+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848EFBC027D7153500F1D243 /* BreathStep+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +27,10 @@
 		840FE2B527D5D28A00B574C4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		840FE2B727D5D28A00B574C4 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		840FE2BA27D5D28A00B574C4 /* Breathwork_Pacer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Breathwork_Pacer.xcdatamodel; sourceTree = "<group>"; };
+		848EFBB727D711AC00F1D243 /* BreathSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathSetView.swift; sourceTree = "<group>"; };
+		848EFBBD27D7126C00F1D243 /* Enumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Enumerations.swift; path = Enumerations/Enumerations.swift; sourceTree = "<group>"; };
+		848EFBBF27D7153500F1D243 /* BreathStep+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BreathStep+CoreDataClass.swift"; sourceTree = "<group>"; };
+		848EFBC027D7153500F1D243 /* BreathStep+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BreathStep+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +87,7 @@
 				840FE2C627D5D2C200B574C4 /* Core Data */,
 				840FE2C527D5D2AD00B574C4 /* Models */,
 				840FE2C427D5D2A300B574C4 /* JSON */,
+				848EFBBD27D7126C00F1D243 /* Enumerations.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -94,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				840FE2B027D5D28A00B574C4 /* CoreDataBoilerPlateView.swift */,
+				848EFBB727D711AC00F1D243 /* BreathSetView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -115,6 +125,8 @@
 		840FE2C627D5D2C200B574C4 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				848EFBBF27D7153500F1D243 /* BreathStep+CoreDataClass.swift */,
+				848EFBC027D7153500F1D243 /* BreathStep+CoreDataProperties.swift */,
 				840FE2B927D5D28A00B574C4 /* Breathwork_Pacer.xcdatamodeld */,
 				840FE2B727D5D28A00B574C4 /* Persistence.swift */,
 			);
@@ -192,9 +204,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				840FE2BB27D5D28A00B574C4 /* Breathwork_Pacer.xcdatamodeld in Sources */,
+				848EFBB827D711AC00F1D243 /* BreathSetView.swift in Sources */,
 				840FE2B827D5D28A00B574C4 /* Persistence.swift in Sources */,
+				848EFBC227D7153500F1D243 /* BreathStep+CoreDataProperties.swift in Sources */,
 				840FE2B127D5D28A00B574C4 /* CoreDataBoilerPlateView.swift in Sources */,
 				840FE2AF27D5D28A00B574C4 /* Breathwork_PacerApp.swift in Sources */,
+				848EFBC127D7153500F1D243 /* BreathStep+CoreDataClass.swift in Sources */,
+				848EFBBE27D7126C00F1D243 /* Enumerations.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

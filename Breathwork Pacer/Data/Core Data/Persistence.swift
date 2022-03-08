@@ -13,9 +13,15 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+        for index in 0..<10 {
+            let newItem = BreathStep(context: viewContext)
+            newItem.id = UUID()
+            
+            let i = Int.random(in: 0..<BreathStepType.allCases.count)
+            newItem.type = BreathStepType.allCases[i].rawValue
+            newItem.duration = Int.random(in: 1...6)
+            newItem.sortOrder = index
+            
         }
         do {
             try viewContext.save()

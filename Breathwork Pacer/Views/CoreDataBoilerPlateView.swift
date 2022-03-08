@@ -12,19 +12,43 @@ struct CoreDataBoilerPlateView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(key: "sortOrder", ascending: true)],
         animation: .default)
-    private var items: FetchedResults<Item>
+    private var items: FetchedResults<BreathStep>
 
     var body: some View {
         NavigationView {
             List {
                 ForEach(items) { item in
                     NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+                        Text("Item at \(item.type ?? "")")
                     } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
+                        
+                        HStack {
+                            
+                            Text(item.type?.capitalized ?? "")
+                            Text("\(item.duration) Seconds")
+                            
+                        }
+                        
                     }
+                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                        
+                        Button {
+                            // copy this item
+                        } label: {
+                            Label("Copy", systemImage: "doc.on.doc")
+                        }
+                        .tint(.blue)
+                        Button {
+                            // delete item
+                        } label: {
+                            Label("Delete", systemImage: "trash.fill")
+                        }
+                        .tint(.red)
+
+                    }
+                    
                 }
                 .onDelete(perform: deleteItems)
             }
