@@ -9,44 +9,102 @@ import SwiftUI
 
 struct BreathStepView: View {
     
-    @State private var isEditing = true
+    @State private var isEditing = false
+    @State private var stepType:BreathStepType
+    @State private var duration:Double
+    
+    init(stepType:BreathStepType, duration:Double) {
+        self.stepType = stepType
+        self.duration = duration
+    }
+    
+    init() {
+        self.stepType = BreathStepType.inhale
+        self.duration = 6.0
+    }
     
     var body: some View {
         
         ZStack {
             
-            Background()
-            if isEditing {
-                EditingView()
-            } else {
-                DisplayView()
+            Background(stepType: $stepType)
+                .onTapGesture {
+                    isEditing.toggle()
+                }
+            
+            ZStack {
+                // Build both views but only display
+                EditingView(stepType: $stepType, duration: $duration, isEditing: isEditing)
+                    .opacity(isEditing ? 1 : 0)
+//                    .offset(x: isEditing ? 0 : 100)
+                    .scaleEffect(isEditing ? 1 : 0.8)
+                
+                DisplayView(stepTypeText: stepType.rawValue.capitalized,
+                            duration: duration)
+                    .opacity(isEditing ? 0.8 : 1)
+//                    .offset(x: isEditing ? -100 : 0)
+                    .blur(radius: isEditing ? 15 : 0)
             }
+            .padding(.horizontal)
+            .foregroundColor(.white)
+            .animation(.easeInOut, value: isEditing)
+            
             
             
         }
-        .frame(height: 200)
+        .frame(height: 120)
         
     }
     
     struct Background:View {
         
+        @Binding var stepType:BreathStepType
+        
         var body: some View {
             Rectangle()
-                .opacity(0.1)
+                .foregroundColor(colorForStepType())
+            
+        }
+        
+        func colorForStepType() -> Color {
+            
+            switch stepType {
+            case .inhale:
+                return Color.pink
+            case .exhale:
+                return Color.cyan
+            case .rest:
+                return Color.orange
+            }
+            
         }
     }
     
     struct DisplayView:View {
         
+        let stepTypeText:String
+        let duration:Double
+        var durationString:String {
+            
+            let formatter = NumberFormatter()
+            formatter.minimumFractionDigits = 1
+            formatter.maximumFractionDigits = 1
+            
+            return String(formatter.string(from: NSNumber(value:duration)) ?? "Nope")
+            
+        }
+        
         var body: some View {
             HStack {
-                Text("Inhale")
+                Text(stepTypeText)
+                    .font(.system(.largeTitle, design: .rounded))
+                    .fontWeight(.heavy)
                     .padding(.horizontal)
-                    .font(.largeTitle)
                 Spacer()
-                Text("4.8 Seconds")
+                Text("\(durationString) Seconds")
                     .padding(.horizontal)
                     .font(.title)
+                    .font(.system(.largeTitle, design: .rounded))
             }
         }
         
@@ -54,8 +112,10 @@ struct BreathStepView: View {
     
     struct EditingView:View {
         
-        @State private var stepType = BreathStepType.inhale.rawValue
-        @State private var duration = 1.0
+        @Binding var stepType:BreathStepType
+        @Binding var duration:Double
+        @FocusState var durationIsFocused: Bool
+        let isEditing:Bool
         
         var formatter: NumberFormatter {
             
@@ -75,13 +135,13 @@ struct BreathStepView: View {
                         .font(.title)
                     Picker("", selection: $stepType) {
                         Text(BreathStepType.inhale.rawValue.capitalized)
-                            .tag(BreathStepType.inhale.rawValue)
+                            .tag(BreathStepType.inhale)
                         Text(BreathStepType.exhale.rawValue.capitalized)
-                            .tag(BreathStepType.exhale.rawValue)
-                        Text(BreathStepType.pause.rawValue.capitalized)
-                            .tag(BreathStepType.pause.rawValue)
+                            .tag(BreathStepType.exhale)
+                        Text(BreathStepType.rest.rawValue.capitalized)
+                            .tag(BreathStepType.rest)
                     }
-                    .pickerStyle(SegmentedPickerStyle())
+                    .pickerStyle(.segmented)
                 }
                 
                 // Duration
@@ -89,14 +149,24 @@ struct BreathStepView: View {
                     
                     Text("Duration:")
                         .font(.title)
-                    
                     TextField("Duration", value: $duration, formatter: formatter)
-                        .border(.blue, width: 1.0)
-                    Stepper("", value: $duration, step: 0.1)
+                        .textFieldStyle(.roundedBorder)
+                    //                        .border(.blue, width: 1.0)
+                        .keyboardType(.decimalPad)
+                        .foregroundColor(.black)
+                        .focused($durationIsFocused)
+                    
+                    if durationIsFocused {
+                        Button("Done") {
+                            durationIsFocused = false
+                        }
+                    } else {
+                        Stepper("", value: $duration, step: 0.1)
+                    }
+                    
                     
                 }
             }
-            .padding(.horizontal)
         }
         
     }
@@ -106,6 +176,6 @@ struct BreathStepView: View {
 
 struct BreathStepView_Previews: PreviewProvider {
     static var previews: some View {
-        BreathStepView()
+        BreathStepView(stepType: BreathStepType.inhale, duration: 6.0)
     }
 }

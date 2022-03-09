@@ -9,8 +9,25 @@ import Foundation
 
 enum BreathStepType: String, CaseIterable {
     
+    case rest = "rest"
     case inhale = "inhale"
     case exhale = "exhale"
-    case pause = "pause"
+    
+    static func stepTypeForString(_ text:String) -> BreathStepType {
+        
+        switch text.lowercased() {
+            
+        case BreathStepType.inhale.rawValue:
+            return .inhale
+        case BreathStepType.exhale.rawValue:
+            return .exhale
+        case BreathStepType.rest.rawValue:
+            return .rest
+        default:
+            return .inhale
+            
+        }
+        
+    }
     
 }

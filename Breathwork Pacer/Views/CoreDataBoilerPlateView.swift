@@ -10,67 +10,70 @@ import CoreData
 
 struct CoreDataBoilerPlateView: View {
     @Environment(\.managedObjectContext) private var viewContext
-
+    
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(key: "sortOrder", ascending: true)],
         animation: .default)
     private var items: FetchedResults<BreathStep>
-
+    
     var body: some View {
         NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.type ?? "")")
-                    } label: {
+            
+            ScrollView {
+                
+                LazyVStack {
+                    ForEach(items) { item in
                         
-                        HStack {
-                            
-                            Text(item.type?.capitalized ?? "")
-                            Text("\(item.duration) Seconds")
-                            
-                        }
+                        let stepType = BreathStepType.stepTypeForString(item.type ?? "")
+                        
+                        BreathStepView(stepType: stepType, duration: Double(item.duration))
+                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                
+                                Button {
+                                    // copy this item
+                                } label: {
+                                    Label("Copy", systemImage: "doc.on.doc")
+                                }
+                                .tint(.blue)
+                                Button {
+                                    // delete item
+                                } label: {
+                                    Label("Delete", systemImage: "trash.fill")
+                                }
+                                .tint(.red)
+                                
+                            }
                         
                     }
-                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                        
-                        Button {
-                            // copy this item
-                        } label: {
-                            Label("Copy", systemImage: "doc.on.doc")
-                        }
-                        .tint(.blue)
-                        Button {
-                            // delete item
-                        } label: {
-                            Label("Delete", systemImage: "trash.fill")
-                        }
-                        .tint(.red)
-
-                    }
-                    
+                    .onDelete(perform: deleteItems)
                 }
-                .onDelete(perform: deleteItems)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        EditButton()
+                    }
+                    ToolbarItem {
+                        Button(action: addItem) {
+                            Label("Add Item", systemImage: "plus")
+                        }
+                    }
+                }
+                Text("Select an item")
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-            Text("Select an item")
+            .navigationTitle("Steps")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
-
+    
     private func addItem() {
         withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
+            let newItem = BreathStep(context: viewContext)
+            newItem.id = UUID()
+            
+            let i = Int.random(in: BreathStepType.allCases.indices)
+            newItem.type = BreathStepType.allCases[i].rawValue
+            newItem.duration = Int.random(in: 1...6)
+            newItem.sortOrder = 0
+            
             do {
                 try viewContext.save()
             } catch {
@@ -81,11 +84,11 @@ struct CoreDataBoilerPlateView: View {
             }
         }
     }
-
+    
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             offsets.map { items[$0] }.forEach(viewContext.delete)
-
+            
             do {
                 try viewContext.save()
             } catch {

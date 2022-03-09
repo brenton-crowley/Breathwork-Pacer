@@ -17,7 +17,7 @@ struct PersistenceController {
             let newItem = BreathStep(context: viewContext)
             newItem.id = UUID()
             
-            let i = Int.random(in: 0..<BreathStepType.allCases.count)
+            let i = Int.random(in: BreathStepType.allCases.indices)
             newItem.type = BreathStepType.allCases[i].rawValue
             newItem.duration = Int.random(in: 1...6)
             newItem.sortOrder = index

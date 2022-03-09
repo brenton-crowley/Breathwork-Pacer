@@ -49,8 +49,8 @@
 		840FE2A227D5D28A00B574C4 = {
 			isa = PBXGroup;
 			children = (
-				840FE2AD27D5D28A00B574C4 /* Breathwork Pacer */,
 				840FE2AE27D5D28A00B574C4 /* Breathwork_PacerApp.swift */,
+				840FE2AD27D5D28A00B574C4 /* Breathwork Pacer */,
 				840FE2AC27D5D28A00B574C4 /* Products */,
 			);
 			sourceTree = "<group>";
