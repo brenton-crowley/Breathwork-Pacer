@@ -16,19 +16,44 @@ struct CoreDataBoilerPlateView: View {
         animation: .default)
     private var items: FetchedResults<BreathStep>
     
+    @State private var editMode:EditMode = .inactive
+//    @FocusState private var focusedStep:Bool
+    
+    @State private var focusedID:UUID?
+    
     var body: some View {
         NavigationView {
             
-            ScrollView {
-                
-                LazyVStack {
-                    ForEach(items) { item in
+            
+            VStack {
+                List {
+                    
+                    let insets = EdgeInsets.init(top: 1,
+                                                 leading: self.editMode == .inactive ? 0 : 10,
+                                                 bottom: 1,
+                                                 trailing: self.editMode == .inactive ? 0 : 10)
+                    
+                    ForEach(items) {step in
                         
-                        let stepType = BreathStepType.stepTypeForString(item.type ?? "")
+                        // use breathstepcell
                         
-                        BreathStepView(stepType: stepType, duration: Double(item.duration))
+                        let stepType = BreathStepType.stepTypeForString(step.type ?? "")
+                        let isParentEditing = editMode != .active
+                        
+                        BreathStepView(stepType: stepType,
+                                       duration: Double(step.duration),
+                                       isFocused: (focusedID == step.id),
+                                       isParentEditing: isParentEditing)
+                            .tag(step.id)
                             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                                 
+    //                            Button {
+    //                                // focus this item
+    //                                self.focusedID = step.id
+    //                            } label: {
+    //                                Label("Edit", systemImage: "pencil")
+    //                            }
+    //                            .tint(.purple)
                                 Button {
                                     // copy this item
                                 } label: {
@@ -43,26 +68,105 @@ struct CoreDataBoilerPlateView: View {
                                 .tint(.red)
                                 
                             }
-                        
+                            .listRowInsets(insets)
+                            .animation(.easeOut(duration: 0.2), value: editMode)
                     }
-                    .onDelete(perform: deleteItems)
+                    .onMove(perform: moveItem)
+                    .onDelete(perform: deleteStep)
+                    .listRowSeparator(.hidden)
+                    
                 }
+                .listStyle(.plain)
+                .border(.red, width: 1.0)
+                .navigationTitle("Steps")
+                .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
+                    
+                    // MARK: - Add Multiple list items to Navigation Bar
+                    ToolbarItemGroup(placement: .navigationBarTrailing) {
+                        
                         EditButton()
-                    }
-                    ToolbarItem {
-                        Button(action: addItem) {
-                            Label("Add Item", systemImage: "plus")
+                        
+                        Button {
+                            // TODO: Add Step to List
+                            
+                        } label: {
+                            Image(systemName: "plus")
                         }
+                        .padding(.trailing)
                     }
                 }
-                Text("Select an item")
+            .environment(\.editMode, $editMode)
+                Button {
+                    // start the breathwork sesson
+                } label: {
+                    Label("Go to Session", systemImage: "clock")
+                        .scaleEffect(1.5)
+                }
+                .padding(.top)
+                .buttonStyle(.plain)
+
             }
-            .navigationTitle("Steps")
-            .navigationBarTitleDisplayMode(.inline)
+            
+            
+            
+            //            ScrollView {
+            //
+            //                LazyVStack {
+            //                    ForEach(items) { item in
+            //
+            //                        let stepType = BreathStepType.stepTypeForString(item.type ?? "")
+            //
+            //                        BreathStepView(stepType: stepType, duration: Double(item.duration))
+            //                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+            //
+            //                                Button {
+            //                                    // copy this item
+            //                                } label: {
+            //                                    Label("Copy", systemImage: "doc.on.doc")
+            //                                }
+            //                                .tint(.blue)
+            //                                Button {
+            //                                    // delete item
+            //                                } label: {
+            //                                    Label("Delete", systemImage: "trash.fill")
+            //                                }
+            //                                .tint(.red)
+            //
+            //                            }
+            //
+            //                    }
+            //                    .onDelete(perform: deleteItems)
+            //                }
+            //                .toolbar {
+            //                    ToolbarItem(placement: .navigationBarTrailing) {
+            //                        EditButton()
+            //                    }
+            //                    ToolbarItem {
+            //                        Button(action: addItem) {
+            //                            Label("Add Item", systemImage: "plus")
+            //                        }
+            //                    }
+            //                }
+            //                Text("Select an item")
+            //            }
+            //            .navigationTitle("Steps")
+            //            .navigationBarTitleDisplayMode(.inline)
         }
     }
+    
+    func moveItem(from source: IndexSet, to destination:Int) {
+        //        breathSteps.move(fromOffsets: source, toOffset: destination)
+    }
+    
+    func deleteStep(at offsets: IndexSet) {
+        //        breathSteps.remove(atOffsets: offsets)
+    }
+    
+    func addStep(_ step:BreathStep) {
+        //        self.breathSteps.append(step)
+    }
+    
     
     private func addItem() {
         withAnimation {
@@ -111,5 +215,6 @@ private let itemFormatter: DateFormatter = {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         CoreDataBoilerPlateView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .preferredColorScheme(.dark)
     }
 }

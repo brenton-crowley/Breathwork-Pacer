@@ -9,45 +9,51 @@ import SwiftUI
 
 struct BreathStepView: View {
     
-    @State private var isEditing = false
+    @State private var isParentEditing:Bool
+    
+    @State private var isFocused = true
     @State private var stepType:BreathStepType
     @State private var duration:Double
     
-    init(stepType:BreathStepType, duration:Double) {
+    
+    init(stepType:BreathStepType, duration:Double, isFocused:Bool, isParentEditing:Bool) {
         self.stepType = stepType
         self.duration = duration
+        self.isFocused = isFocused
+        self.isParentEditing = isParentEditing
     }
     
     init() {
         self.stepType = BreathStepType.inhale
         self.duration = 6.0
+        self.isFocused = false
+        self.isParentEditing = false
     }
     
     var body: some View {
-        
+    
         ZStack {
             
             Background(stepType: $stepType)
                 .onTapGesture {
-                    isEditing.toggle()
+                    isFocused.toggle()
                 }
             
             ZStack {
                 // Build both views but only display
-                EditingView(stepType: $stepType, duration: $duration, isEditing: isEditing)
-                    .opacity(isEditing ? 1 : 0)
-//                    .offset(x: isEditing ? 0 : 100)
-                    .scaleEffect(isEditing ? 1 : 0.8)
+                EditingView(stepType: $stepType, duration: $duration, isEditing: isFocused)
+                    .opacity(isFocused ? 1 : 0)
+                    .offset(x: isFocused ? 0 : -100)
+//                    .scaleEffect(isFocused ? 1 : 0.8)
                 
-                DisplayView(stepTypeText: stepType.rawValue.capitalized,
+                DisplayView(isParentEditing: isParentEditing,stepTypeText: stepType.rawValue.capitalized,
                             duration: duration)
-                    .opacity(isEditing ? 0.8 : 1)
-//                    .offset(x: isEditing ? -100 : 0)
-                    .blur(radius: isEditing ? 15 : 0)
+                    .opacity(isFocused ? 0 : 1)
+                    .offset(x: isFocused ? 100 : 0)
+//                    .blur(radius: isFocused ? 15 : 0)
             }
             .padding(.horizontal)
-            .foregroundColor(.white)
-            .animation(.easeInOut, value: isEditing)
+            .animation(.easeInOut, value: isFocused)
             
             
             
@@ -82,6 +88,7 @@ struct BreathStepView: View {
     
     struct DisplayView:View {
         
+        let isParentEditing:Bool
         let stepTypeText:String
         let duration:Double
         var durationString:String {
@@ -97,14 +104,13 @@ struct BreathStepView: View {
         var body: some View {
             HStack {
                 Text(stepTypeText)
-                    .font(.system(.largeTitle, design: .rounded))
+                    .font(.system(isParentEditing ? .title : .largeTitle, design: .rounded))
                     .fontWeight(.heavy)
                     .padding(.horizontal)
                 Spacer()
-                Text("\(durationString) Seconds")
+                Text("\(durationString) \nseconds")
                     .padding(.horizontal)
-                    .font(.title)
-                    .font(.system(.largeTitle, design: .rounded))
+                    .font(.system(isParentEditing ? .title3 : .title2, design: .rounded))
             }
         }
         
@@ -132,7 +138,7 @@ struct BreathStepView: View {
                 // Step Type
                 HStack {
                     Text("Step Type: ")
-                        .font(.title)
+                        .font(.title3)
                     Picker("", selection: $stepType) {
                         Text(BreathStepType.inhale.rawValue.capitalized)
                             .tag(BreathStepType.inhale)
@@ -148,23 +154,21 @@ struct BreathStepView: View {
                 HStack {
                     
                     Text("Duration:")
-                        .font(.title)
+                        .font(.title3)
+                    Spacer()
                     TextField("Duration", value: $duration, formatter: formatter)
                         .textFieldStyle(.roundedBorder)
                     //                        .border(.blue, width: 1.0)
                         .keyboardType(.decimalPad)
-                        .foregroundColor(.black)
                         .focused($durationIsFocused)
-                    
                     if durationIsFocused {
                         Button("Done") {
                             durationIsFocused = false
                         }
+                        .buttonStyle(.plain)
                     } else {
                         Stepper("", value: $duration, step: 0.1)
                     }
-                    
-                    
                 }
             }
         }
@@ -176,6 +180,11 @@ struct BreathStepView: View {
 
 struct BreathStepView_Previews: PreviewProvider {
     static var previews: some View {
-        BreathStepView(stepType: BreathStepType.inhale, duration: 6.0)
+        BreathStepView(
+            stepType: BreathStepType.inhale,
+            duration: 6.0,
+            isFocused: true,
+            isParentEditing: false)
+            .preferredColorScheme(.dark)
     }
 }

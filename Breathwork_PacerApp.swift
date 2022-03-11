@@ -15,6 +15,7 @@ struct Breathwork_PacerApp: App {
         WindowGroup {
             BreathStepView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .preferredColorScheme(.dark)
         }
     }
 }
