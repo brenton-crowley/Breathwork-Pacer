@@ -10,11 +10,12 @@ import SwiftUI
 @main
 struct Breathwork_PacerApp: App {
     let persistenceController = PersistenceController.shared
-
+    
     var body: some Scene {
         WindowGroup {
-            BreathStepView()
+            BreathSetsView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environmentObject(BreathSetsModel())
                 .preferredColorScheme(.dark)
         }
     }

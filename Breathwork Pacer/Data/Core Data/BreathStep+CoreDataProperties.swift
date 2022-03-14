@@ -2,7 +2,7 @@
 //  BreathStep+CoreDataProperties.swift
 //  Breathwork Pacer
 //
-//  Created by Brent on 8/3/2022.
+//  Created by Brent on 15/3/2022.
 //
 //
 
@@ -16,10 +16,11 @@ extension BreathStep {
         return NSFetchRequest<BreathStep>(entityName: "BreathStep")
     }
 
-    @NSManaged public var id: UUID?
-    @NSManaged public var type: String?
-    @NSManaged public var duration: Int
+    @NSManaged public var duration: Double
+    @NSManaged public var id: UUID
     @NSManaged public var sortOrder: Int
+    @NSManaged public var type: String
+    @NSManaged public var breathSet: BreathSet
 
 }
 

@@ -37,7 +37,7 @@ struct CoreDataBoilerPlateView: View {
                         
                         // use breathstepcell
                         
-                        let stepType = BreathStepType.stepTypeForString(step.type ?? "")
+                        let stepType = BreathStepType.stepTypeForString(step.type)
                         let isParentEditing = editMode != .active
                         
                         BreathStepView(stepType: stepType,
@@ -107,51 +107,6 @@ struct CoreDataBoilerPlateView: View {
                 .buttonStyle(.plain)
 
             }
-            
-            
-            
-            //            ScrollView {
-            //
-            //                LazyVStack {
-            //                    ForEach(items) { item in
-            //
-            //                        let stepType = BreathStepType.stepTypeForString(item.type ?? "")
-            //
-            //                        BreathStepView(stepType: stepType, duration: Double(item.duration))
-            //                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-            //
-            //                                Button {
-            //                                    // copy this item
-            //                                } label: {
-            //                                    Label("Copy", systemImage: "doc.on.doc")
-            //                                }
-            //                                .tint(.blue)
-            //                                Button {
-            //                                    // delete item
-            //                                } label: {
-            //                                    Label("Delete", systemImage: "trash.fill")
-            //                                }
-            //                                .tint(.red)
-            //
-            //                            }
-            //
-            //                    }
-            //                    .onDelete(perform: deleteItems)
-            //                }
-            //                .toolbar {
-            //                    ToolbarItem(placement: .navigationBarTrailing) {
-            //                        EditButton()
-            //                    }
-            //                    ToolbarItem {
-            //                        Button(action: addItem) {
-            //                            Label("Add Item", systemImage: "plus")
-            //                        }
-            //                    }
-            //                }
-            //                Text("Select an item")
-            //            }
-            //            .navigationTitle("Steps")
-            //            .navigationBarTitleDisplayMode(.inline)
         }
     }
     
@@ -175,7 +130,7 @@ struct CoreDataBoilerPlateView: View {
             
             let i = Int.random(in: BreathStepType.allCases.indices)
             newItem.type = BreathStepType.allCases[i].rawValue
-            newItem.duration = Int.random(in: 1...6)
+            newItem.duration = Double.random(in: 1.0...6.0)
             newItem.sortOrder = 0
             
             do {

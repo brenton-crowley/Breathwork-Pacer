@@ -43,13 +43,13 @@ struct BreathStepView: View {
                 // Build both views but only display
                 EditingView(stepType: $stepType, duration: $duration, isEditing: isFocused)
                     .opacity(isFocused ? 1 : 0)
-                    .offset(x: isFocused ? 0 : -100)
+                    .offset(y: isFocused ? 0 : -40)
 //                    .scaleEffect(isFocused ? 1 : 0.8)
                 
                 DisplayView(isParentEditing: isParentEditing,stepTypeText: stepType.rawValue.capitalized,
                             duration: duration)
                     .opacity(isFocused ? 0 : 1)
-                    .offset(x: isFocused ? 100 : 0)
+                    .offset(y: isFocused ? 40 : 0)
 //                    .blur(radius: isFocused ? 15 : 0)
             }
             .padding(.horizontal)

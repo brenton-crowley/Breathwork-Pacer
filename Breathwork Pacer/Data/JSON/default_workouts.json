@@ -1,0 +1,53 @@
+[
+    {
+        "title": "Resonance",
+        "steps": [
+            {
+                "type": "inhale",
+                "duration": 6.0
+            },
+            {
+                "type": "exhale",
+                "duration": 4.0
+            }
+        ]
+    },
+    {
+        "title": "Triangle",
+        "steps": [
+            {
+                "type": "inhale",
+                "duration": 3.0
+            },
+            {
+                "type": "rest",
+                "duration": 7.0
+            },
+            {
+                "type": "exhale",
+                "duration": 8.0
+            }
+        ]
+    },
+    {
+        "title": "Box",
+        "steps": [
+            {
+                "type": "inhale",
+                "duration": 4.0
+            },
+            {
+                "type": "rest",
+                "duration": 4.0
+            },
+            {
+                "type": "exhale",
+                "duration": 4.0
+            },
+            {
+                "type": "rest",
+                "duration": 4.0
+            }
+        ]
+    }
+]

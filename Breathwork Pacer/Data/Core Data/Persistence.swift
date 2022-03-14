@@ -19,7 +19,7 @@ struct PersistenceController {
             
             let i = Int.random(in: BreathStepType.allCases.indices)
             newItem.type = BreathStepType.allCases[i].rawValue
-            newItem.duration = Int.random(in: 1...6)
+            newItem.duration = Double.random(in: 1.0...6.0)
             newItem.sortOrder = index
             
         }
