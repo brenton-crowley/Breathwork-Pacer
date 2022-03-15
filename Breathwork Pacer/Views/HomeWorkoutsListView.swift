@@ -28,7 +28,18 @@ struct HomeWorkoutsListView: View {
                             NavigationLink {
                                 // Will need to change to BreathSetView
 //                                CoreDataBoilerPlateView(breathSet: breathSet)
-                                EditStepsView(breathSet: breathSet)
+                                // MARK: EditStepsView and Start Breathwork Button
+                                VStack {
+                                    EditStepsView(breathSet: breathSet)
+                                    Button {
+                                        // start the breathwork sesson
+                                    } label: {
+                                        Label("Go to Session", systemImage: "clock")
+                                            .scaleEffect(1.5)
+                                    }
+                                    .padding(.top)
+                                    .buttonStyle(.plain)
+                                }
                             } label: {
                                 Text(breathSet.title)
                             }

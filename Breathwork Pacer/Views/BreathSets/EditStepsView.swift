@@ -36,7 +36,6 @@ struct EditStepsView: View {
                 
             }
             .padding(0)
-            .border(.red, width: 1.0)
             .navigationBarTitleDisplayMode(.inline)
 
         } else {
