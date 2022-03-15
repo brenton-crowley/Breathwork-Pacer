@@ -23,6 +23,13 @@ struct BreathStepView: View {
         self.isParentEditing = isParentEditing
     }
     
+    init(stepType:BreathStepType, duration:Double) {
+        self.stepType = stepType
+        self.duration = duration
+        self.isFocused = false
+        self.isParentEditing = false
+    }
+    
     init() {
         self.stepType = BreathStepType.inhale
         self.duration = 6.0

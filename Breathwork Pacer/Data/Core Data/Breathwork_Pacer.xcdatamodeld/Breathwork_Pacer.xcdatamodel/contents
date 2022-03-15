@@ -2,6 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21D62" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="BreathSet" representedClassName="BreathSet" syncable="YES">
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="sortOrder" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="title" attributeType="String"/>
         <relationship name="steps" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="BreathStep" inverseName="breathSet" inverseEntity="BreathStep"/>
     </entity>
@@ -18,6 +19,6 @@
     <elements>
         <element name="BreathStep" positionX="-63" positionY="-9" width="128" height="104"/>
         <element name="Item" positionX="-63" positionY="-18" width="128" height="44"/>
-        <element name="BreathSet" positionX="-63" positionY="18" width="128" height="74"/>
+        <element name="BreathSet" positionX="-63" positionY="18" width="128" height="89"/>
     </elements>
 </model>

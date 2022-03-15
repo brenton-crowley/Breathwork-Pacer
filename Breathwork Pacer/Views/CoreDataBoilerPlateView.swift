@@ -10,9 +10,11 @@ import CoreData
 
 struct CoreDataBoilerPlateView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @EnvironmentObject private var model:BreathSetsModel
     
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(key: "sortOrder", ascending: true)],
+        sortDescriptors: [NSSortDescriptor(key: "sortOrder",
+                                           ascending: true)],
         animation: .default)
     private var items: FetchedResults<BreathStep>
     
@@ -21,6 +23,18 @@ struct CoreDataBoilerPlateView: View {
     
     @State private var focusedID:UUID?
     
+    var breathSet:BreathSet?
+    var steps:[BreathStep] {
+        
+        if let breathSet = breathSet,
+           let steps = breathSet.steps {
+            return steps.allObjects as! [BreathStep]
+        } else {
+            return [BreathStep]()
+        }
+        
+    }
+
     var body: some View {
         NavigationView {
             
@@ -33,7 +47,9 @@ struct CoreDataBoilerPlateView: View {
                                                  bottom: 1,
                                                  trailing: self.editMode == .inactive ? 0 : 10)
                     
-                    ForEach(items) {step in
+
+                    
+                    ForEach(steps) {step in
                         
                         // use breathstepcell
                         

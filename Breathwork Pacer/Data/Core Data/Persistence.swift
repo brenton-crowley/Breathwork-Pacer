@@ -13,6 +13,11 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
+        let breathSet = BreathSet(context: viewContext)
+        breathSet.id = UUID()
+        breathSet.sortOrder = 0
+        breathSet.title = "Resonance Breathing Test"
+        
         for index in 0..<6 {
             let newItem = BreathStep(context: viewContext)
             newItem.id = UUID()
@@ -21,6 +26,7 @@ struct PersistenceController {
             newItem.type = BreathStepType.allCases[i].rawValue
             newItem.duration = Double.random(in: 1.0...6.0)
             newItem.sortOrder = index
+            newItem.breathSet = breathSet
             
         }
         do {

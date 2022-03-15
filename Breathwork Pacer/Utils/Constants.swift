@@ -13,7 +13,7 @@ struct Constants {
     static let dataIsPreloadedKey = "dataIsPreloaded"
     
     
-    // MARK: - BreathStep
+    // MARK: - CoreData Models
     static let sortOrderKey = "sortOrder"
     
 }

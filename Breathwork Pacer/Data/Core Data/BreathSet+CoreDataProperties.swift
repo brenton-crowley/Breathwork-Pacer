@@ -18,6 +18,7 @@ extension BreathSet {
 
     @NSManaged public var id: UUID
     @NSManaged public var title: String
+    @NSManaged public var sortOrder: Int
     @NSManaged public var steps: NSSet?
 
 }
