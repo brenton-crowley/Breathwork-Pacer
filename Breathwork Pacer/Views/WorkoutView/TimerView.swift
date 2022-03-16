@@ -11,7 +11,7 @@ struct TimerView:View {
     
     @EnvironmentObject private var viewModel:WorkoutViewModel
     
-    @State var isEditing:Bool = false
+    @State var isEditing:Bool = true
     @State var minutes:Int
     @State var seconds:Int
     
@@ -31,18 +31,31 @@ struct TimerView:View {
                     Text(" seconds")
                         .font(.caption)
                     // Done Editing
-                    Button {
-                        withAnimation {
-                            isEditing = false
-                        }
-                        viewModel.setNewTotalDurationFromMinutes(minutes, seconds: seconds)
-                    } label: {
-                        Image(systemName: "checkmark.circle")
-                    }
-                    .padding(.horizontal)
-                    .scaleEffect(1.5)
-                    .buttonStyle(.plain)
+                    
+                    VStack {
+                        TimerPickerButton(systemImageName: "gobackward",
+                                          newMinutes: viewModel.getDefaultMinutes(),
+                                          newSeconds: viewModel.getDefaultSeconds(),
+                                          isEditing: $isEditing) {
 
+                            self.minutes = viewModel.getDefaultMinutes()
+                            self.seconds = viewModel.getDefaultSeconds()
+                        }
+                        Spacer()
+                        TimerPickerButton(systemImageName: "bookmark.circle",
+                                          newMinutes: minutes,
+                                          newSeconds: seconds,
+                                          isEditing: $isEditing) {
+                            viewModel.setNewTotalDurationFromMinutes(minutes, seconds: seconds)
+                        }
+                        Spacer()
+                        TimerPickerButton(systemImageName: "checkmark.circle",
+                                          newMinutes: minutes,
+                                          newSeconds: seconds,
+                                          isEditing: $isEditing)
+                        
+                    }
+                    
 
                 }
                 .frame(width: 300, height: 200)
@@ -56,8 +69,12 @@ struct TimerView:View {
                 Text(String(format: "%02d:%02d", viewModel.getCountdownMinutes(), viewModel.getCountdownSeconds()))
                     .font(.largeTitle)
                     .onTapGesture {
-                        withAnimation {
-                            isEditing = true
+                        if !viewModel.workout.isPlaying {
+                            withAnimation {
+                                isEditing = true
+                                self.minutes = viewModel.getCountdownMinutes()
+                                self.seconds = viewModel.getCountdownSeconds()
+                            }
                         }
                     }
                     .transition(.scale)
@@ -89,8 +106,43 @@ struct TimerView:View {
         
     }
 
+    struct TimerPickerButton:View {
+        
+        @EnvironmentObject private var viewModel:WorkoutViewModel
+        
+        let systemImageName:String
+        let newMinutes:Int
+        let newSeconds:Int
+        @Binding var isEditing:Bool
+        var action:(() -> Void)?
+        
+        var body: some View {
+            
+            Button {
+                
+                if let action = action {
+                    action()
+                } else {
+                    withAnimation {
+                        isEditing = false
+                    }
+                    viewModel.setNewTotalDurationFromMinutes(newMinutes, seconds: newSeconds)
+                }
+                
+            } label: {
+                Image(systemName: systemImageName)
+                    .resizable()
+                    .scaledToFit()
+            }
+            .padding()
+            .buttonStyle(.plain)
+            
+        }
+        
+    }
     
 }
+
 
 extension UIPickerView {
     open override var intrinsicContentSize: CGSize {

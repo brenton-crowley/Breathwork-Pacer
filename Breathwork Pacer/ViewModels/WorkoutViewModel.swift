@@ -14,6 +14,8 @@ class WorkoutViewModel: ObservableObject {
     
     let colours:[Color] = [.blue, .yellow, .red, .gray, .brown, .cyan, .green, .indigo, .mint, .orange, .pink, .purple]
     
+    private var timer = Timer()
+    
     init(breathSet:BreathSet) {
         
         let isFirstRun = UserDefaults.standard.bool(forKey: Constants.dataIsPreloadedKey)
@@ -92,8 +94,35 @@ class WorkoutViewModel: ObservableObject {
         
         let totalSeconds = minutes * 60 + seconds
         self.workout.updateTotalSecondsDurationTo(totalSeconds: totalSeconds)
-        
+        self.workout.resetElapsedTime()
         // TODO: Update User Defaults with this value
     }
     
+    func getDefaultMinutes() -> Int {
+        // TODO: Probably need to update this to user defaults, but we'll use workout for now
+        return Int(self.workout.totalSecondsDuration / 60)
+    }
+    
+    func getDefaultSeconds() -> Int {
+        // TODO: Probably need to update this to user defaults, but we'll use workout for now
+        return self.workout.totalSecondsDuration % 60
+    }
+    
+    func pauseSession() {
+        self.timer.invalidate()
+        self.workout.setIsPlaying(false)
+    }
+    
+    func playSession() {
+        
+        
+        self.timer = Timer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
+        RunLoop.current.add(timer, forMode: .common)
+        
+        self.workout.setIsPlaying(true)
+    }
+    
+    @objc func fireTimer() {
+        self.workout.incrementElapsedTime()
+    }
 }

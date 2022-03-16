@@ -13,8 +13,6 @@ struct WorkoutView: View {
     
     @EnvironmentObject var viewModel:WorkoutViewModel
     
-    @State var isPlaying = false
-    
     var breathSet:BreathSet { viewModel.workout.breathSet }
     
     var body: some View {
@@ -35,7 +33,7 @@ struct WorkoutView: View {
                     .frame(width: geo.size.width * 0.6, height: geo.size.height * 0.35)
                     .padding()
                 // Play/Pause Controls
-                PlayControl(isPlaying: $isPlaying)
+                PlayControl()
                     .frame(width: geo.size.height * 0.15, height: geo.size.height * 0.15)
                     .padding()
                 // Segmented control of sounds
@@ -44,6 +42,9 @@ struct WorkoutView: View {
             }
             .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
             
+        }
+        .onDisappear {
+            viewModel.pauseSession()
         }
     }
 }
@@ -82,14 +83,14 @@ struct SoundControl:View {
 
 struct PlayControl:View {
     
-    @Binding var isPlaying:Bool
+    @EnvironmentObject private var viewModel:WorkoutViewModel
     
     var body: some View {
         
-        if isPlaying {
+        if viewModel.workout.isPlaying {
             Button {
                 // Pause the workout
-                isPlaying = false
+                viewModel.pauseSession()
             } label: {
                 ScalableSystemImageView(systemImageText: "pause.circle")
                     
@@ -98,7 +99,7 @@ struct PlayControl:View {
         } else {
             Button {
                 // Play the workout
-                isPlaying = true
+                viewModel.playSession()
             } label: {
                 ScalableSystemImageView(systemImageText: "play.circle")
             }

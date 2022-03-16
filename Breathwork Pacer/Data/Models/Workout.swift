@@ -32,4 +32,20 @@ struct Workout {
     mutating func updateTotalSecondsDurationTo(totalSeconds:Int) {
         self.totalSecondsDuration = totalSeconds
     }
+    
+    mutating func toggleIsPlaying() {
+        self.isPlaying.toggle()
+    }
+    
+    mutating func setIsPlaying(_ isPlaying:Bool) {
+        self.isPlaying = isPlaying
+    }
+    
+    mutating func incrementElapsedTime() {
+        self.elapsedSecondsCount += 1
+    }
+    
+    mutating func resetElapsedTime() {
+        self.elapsedSecondsCount = 0
+    }
 }
