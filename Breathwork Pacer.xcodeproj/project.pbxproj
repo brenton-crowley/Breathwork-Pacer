@@ -11,8 +11,11 @@
 		840FE2B127D5D28A00B574C4 /* CoreDataBoilerPlateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840FE2B027D5D28A00B574C4 /* CoreDataBoilerPlateView.swift */; };
 		840FE2B327D5D28A00B574C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 840FE2B227D5D28A00B574C4 /* Assets.xcassets */; };
 		840FE2B627D5D28A00B574C4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 840FE2B527D5D28A00B574C4 /* Preview Assets.xcassets */; };
-		840FE2B827D5D28A00B574C4 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840FE2B727D5D28A00B574C4 /* Persistence.swift */; };
 		840FE2BB27D5D28A00B574C4 /* Breathwork_Pacer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 840FE2B927D5D28A00B574C4 /* Breathwork_Pacer.xcdatamodeld */; };
+		8410EF7227E14F550046FC12 /* WorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8410EF7127E14F550046FC12 /* WorkoutView.swift */; };
+		8418D97027E168A1004C43B8 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418D96F27E168A1004C43B8 /* TimerView.swift */; };
+		8418D97227E18C75004C43B8 /* WorkoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418D97127E18C75004C43B8 /* WorkoutViewModel.swift */; };
+		8418D97427E18C8D004C43B8 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418D97327E18C8D004C43B8 /* Workout.swift */; };
 		8457F0EB27DFF8740059D627 /* default_workouts.json in Resources */ = {isa = PBXBuildFile; fileRef = 8457F0EA27DFF8740059D627 /* default_workouts.json */; };
 		846B98F227DFFAC0009367F6 /* HomeWorkoutsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B98F127DFFAC0009367F6 /* HomeWorkoutsListView.swift */; };
 		846B98F427DFFADA009367F6 /* BreathSetsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B98F327DFFADA009367F6 /* BreathSetsModel.swift */; };
@@ -35,8 +38,11 @@
 		840FE2B027D5D28A00B574C4 /* CoreDataBoilerPlateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataBoilerPlateView.swift; sourceTree = "<group>"; };
 		840FE2B227D5D28A00B574C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		840FE2B527D5D28A00B574C4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		840FE2B727D5D28A00B574C4 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		840FE2BA27D5D28A00B574C4 /* Breathwork_Pacer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Breathwork_Pacer.xcdatamodel; sourceTree = "<group>"; };
+		8410EF7127E14F550046FC12 /* WorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutView.swift; sourceTree = "<group>"; };
+		8418D96F27E168A1004C43B8 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		8418D97127E18C75004C43B8 /* WorkoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewModel.swift; sourceTree = "<group>"; };
+		8418D97327E18C8D004C43B8 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		8457F0EA27DFF8740059D627 /* default_workouts.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = default_workouts.json; sourceTree = "<group>"; };
 		846B98F127DFFAC0009367F6 /* HomeWorkoutsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWorkoutsListView.swift; sourceTree = "<group>"; };
 		846B98F327DFFADA009367F6 /* BreathSetsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathSetsModel.swift; sourceTree = "<group>"; };
@@ -84,12 +90,12 @@
 		840FE2AD27D5D28A00B574C4 /* Breathwork Pacer */ = {
 			isa = PBXGroup;
 			children = (
-				846B98FF27E004E8009367F6 /* Utils */,
-				840FE2C327D5D29C00B574C4 /* Views */,
-				840FE2C227D5D29800B574C4 /* ViewModels */,
-				840FE2C127D5D29400B574C4 /* Data */,
 				840FE2B227D5D28A00B574C4 /* Assets.xcassets */,
+				840FE2C127D5D29400B574C4 /* Data */,
 				840FE2B427D5D28A00B574C4 /* Preview Content */,
+				846B98FF27E004E8009367F6 /* Utils */,
+				840FE2C227D5D29800B574C4 /* ViewModels */,
+				840FE2C327D5D29C00B574C4 /* Views */,
 			);
 			path = "Breathwork Pacer";
 			sourceTree = "<group>";
@@ -117,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				846B98F327DFFADA009367F6 /* BreathSetsModel.swift */,
+				8418D97127E18C75004C43B8 /* WorkoutViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -128,6 +135,7 @@
 				846B98F027DFFAB2009367F6 /* BreathSets */,
 				848EFBC327D7217B00F1D243 /* BreathStep */,
 				840FE2B027D5D28A00B574C4 /* CoreDataBoilerPlateView.swift */,
+				8410EF7027E14A800046FC12 /* WorkoutView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -135,6 +143,7 @@
 		840FE2C527D5D2AD00B574C4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8418D97327E18C8D004C43B8 /* Workout.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -148,10 +157,18 @@
 				846B990327E00E1A009367F6 /* BreathSet+CoreDataProperties.swift */,
 				846B98F927E00133009367F6 /* BreathStep+CoreDataClass.swift */,
 				846B98FA27E00133009367F6 /* BreathStep+CoreDataProperties.swift */,
-				840FE2B727D5D28A00B574C4 /* Persistence.swift */,
 				84D197F427E052B60083983D /* StorageProvider.swift */,
 			);
 			path = "Core Data";
+			sourceTree = "<group>";
+		};
+		8410EF7027E14A800046FC12 /* WorkoutView */ = {
+			isa = PBXGroup;
+			children = (
+				8410EF7127E14F550046FC12 /* WorkoutView.swift */,
+				8418D96F27E168A1004C43B8 /* TimerView.swift */,
+			);
+			path = WorkoutView;
 			sourceTree = "<group>";
 		};
 		8457F0E927DFF84E0059D627 /* JSON */ = {
@@ -258,9 +275,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8418D97027E168A1004C43B8 /* TimerView.swift in Sources */,
 				84D197F527E052B60083983D /* StorageProvider.swift in Sources */,
 				840FE2BB27D5D28A00B574C4 /* Breathwork_Pacer.xcdatamodeld in Sources */,
-				840FE2B827D5D28A00B574C4 /* Persistence.swift in Sources */,
+				8418D97427E18C8D004C43B8 /* Workout.swift in Sources */,
 				846B990427E00E1A009367F6 /* BreathSet+CoreDataClass.swift in Sources */,
 				840FE2B127D5D28A00B574C4 /* CoreDataBoilerPlateView.swift in Sources */,
 				848EFBC527D7218800F1D243 /* BreathStepView.swift in Sources */,
@@ -268,11 +286,13 @@
 				846B990727E02AAE009367F6 /* EditStepsView.swift in Sources */,
 				840FE2AF27D5D28A00B574C4 /* Breathwork_PacerApp.swift in Sources */,
 				846B98FD27E00133009367F6 /* BreathStep+CoreDataClass.swift in Sources */,
+				8410EF7227E14F550046FC12 /* WorkoutView.swift in Sources */,
 				846B98FE27E00133009367F6 /* BreathStep+CoreDataProperties.swift in Sources */,
 				848EFBBE27D7126C00F1D243 /* Enumerations.swift in Sources */,
 				846B990527E00E1A009367F6 /* BreathSet+CoreDataProperties.swift in Sources */,
 				84D197F727E059430083983D /* BreathSet+PreviewProvider.swift in Sources */,
 				846B990127E004F3009367F6 /* Constants.swift in Sources */,
+				8418D97227E18C75004C43B8 /* WorkoutViewModel.swift in Sources */,
 				846B98F627DFFC13009367F6 /* JSONModels.swift in Sources */,
 				846B98F227DFFAC0009367F6 /* HomeWorkoutsListView.swift in Sources */,
 			);

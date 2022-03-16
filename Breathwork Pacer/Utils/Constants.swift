@@ -9,11 +9,17 @@ import Foundation
 
 struct Constants {
     
-    // MARK: - ViewModel
+    // MARK: - UserDefaults
     static let dataIsPreloadedKey = "dataIsPreloaded"
-    
+    static let workoutDurationKey = "workoutDuration"
+    static let breathAnimationColorKey = "breathAnimationColor"
+    static let soundControlTypeKey = "soundControlType"
+    static let animationTypeKey = "animationType"
     
     // MARK: - CoreData Models
     static let sortOrderKey = "sortOrder"
+    
+    
+    
     
 }

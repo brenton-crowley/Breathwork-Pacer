@@ -23,7 +23,7 @@ struct CoreDataBoilerPlateView: View {
     
     @State private var focusedID:UUID?
     
-    var breathSet:BreathSet?
+    var breathSet:BreathSet? = BreathSet.example
     var steps:[BreathStep] {
         
         if let breathSet = breathSet,
@@ -93,7 +93,6 @@ struct CoreDataBoilerPlateView: View {
                     
                 }
                 .listStyle(.plain)
-                .border(.red, width: 1.0)
                 .navigationTitle("Steps")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
@@ -185,7 +184,7 @@ private let itemFormatter: DateFormatter = {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        CoreDataBoilerPlateView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        CoreDataBoilerPlateView().environment(\.managedObjectContext, StorageProvider.preview.persistentContainer.viewContext)
             .preferredColorScheme(.dark)
     }
 }

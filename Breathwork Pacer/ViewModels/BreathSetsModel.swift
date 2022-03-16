@@ -7,12 +7,16 @@
 
 import Foundation
 import CoreData
+import SwiftUI
 
 class BreathSetsModel: ObservableObject {
+    
+    @Environment(\.colorScheme) static var colorScheme
     
     private let storageProvider:StorageProvider
     private let viewContext:NSManagedObjectContext
     private var jsonBreathSets = [BreathSetJSON]()
+    private let isResetStore = false // set to true to reset the persistent store with default data. Will delete any existing data
     @Published private(set) var breathSets:[BreathSet]?
     
     init(storageProvider:StorageProvider = StorageProvider()) {
@@ -27,7 +31,7 @@ class BreathSetsModel: ObservableObject {
     func preloadData() {
         
         // Reset the store with preloaded data
-        if false {
+        if isResetStore {
             
             func batchDeleteEntityName(_ entityName:String) {
             
@@ -35,7 +39,7 @@ class BreathSetsModel: ObservableObject {
                 let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 
                 do {
-                    try PersistenceController.shared.container.persistentStoreCoordinator.execute(deleteRequest, with: viewContext)
+                    try self.storageProvider.persistentContainer.persistentStoreCoordinator.execute(deleteRequest, with: self.viewContext)
                 } catch {
                     print(error)
                 }

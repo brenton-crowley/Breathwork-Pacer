@@ -21,20 +21,23 @@ struct EditStepsView: View {
         
         if let breathSet = data {
 
-            VStack {
+            VStack(alignment: .center, spacing: 0) {
                 
                 Text(breathSet.title)
                     .font(.title)
+                    .padding(.bottom)
                 
                 List {
                     let steps = breathSet.steps?.allObjects as! [BreathStep]
                     ForEach(steps) { step in
                         LocalStepView(step: step)
                     }
+
                     
                 }
                 
             }
+            .listStyle(.plain)
             .padding(0)
             .navigationBarTitleDisplayMode(.inline)
 

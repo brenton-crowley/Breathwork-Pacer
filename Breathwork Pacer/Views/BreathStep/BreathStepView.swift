@@ -11,7 +11,7 @@ struct BreathStepView: View {
     
     @State private var isParentEditing:Bool
     
-    @State private var isFocused = true
+    @State private var isFocused = false
     @State private var stepType:BreathStepType
     @State private var duration:Double
     
@@ -57,13 +57,11 @@ struct BreathStepView: View {
                             duration: duration)
                     .opacity(isFocused ? 0 : 1)
                     .offset(y: isFocused ? 40 : 0)
+                    .foregroundColor(BreathSetsModel.colorScheme == .light ? .white : .black)
 //                    .blur(radius: isFocused ? 15 : 0)
             }
             .padding(.horizontal)
             .animation(.easeInOut, value: isFocused)
-            
-            
-            
         }
         .frame(height: 120)
         
@@ -146,6 +144,7 @@ struct BreathStepView: View {
                 HStack {
                     Text("Step Type: ")
                         .font(.title3)
+                        .foregroundColor(BreathSetsModel.colorScheme == .light ? .white : .black)
                     Picker("", selection: $stepType) {
                         Text(BreathStepType.inhale.rawValue.capitalized)
                             .tag(BreathStepType.inhale)
@@ -155,6 +154,7 @@ struct BreathStepView: View {
                             .tag(BreathStepType.rest)
                     }
                     .pickerStyle(.segmented)
+                    .colorMultiply(.white)
                 }
                 
                 // Duration
@@ -162,6 +162,7 @@ struct BreathStepView: View {
                     
                     Text("Duration:")
                         .font(.title3)
+                        .foregroundColor(BreathSetsModel.colorScheme == .light ? .white : .black)
                     Spacer()
                     TextField("Duration", value: $duration, formatter: formatter)
                         .textFieldStyle(.roundedBorder)
@@ -190,8 +191,8 @@ struct BreathStepView_Previews: PreviewProvider {
         BreathStepView(
             stepType: BreathStepType.inhale,
             duration: 6.0,
-            isFocused: true,
+            isFocused: false,
             isParentEditing: false)
-            .preferredColorScheme(.dark)
+//            .preferredColorScheme(.dark)
     }
 }

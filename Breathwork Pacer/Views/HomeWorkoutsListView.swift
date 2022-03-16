@@ -31,14 +31,24 @@ struct HomeWorkoutsListView: View {
                                 // MARK: EditStepsView and Start Breathwork Button
                                 VStack {
                                     EditStepsView(breathSet: breathSet)
-                                    Button {
-                                        // start the breathwork sesson
+                                    
+                                    NavigationLink {
+                                        WorkoutView()
+                                            .environmentObject(WorkoutViewModel(breathSet: breathSet))
+                                            .navigationTitle(breathSet.title)
                                     } label: {
                                         Label("Go to Session", systemImage: "clock")
                                             .scaleEffect(1.5)
+                                            .padding(.top)
+                                            .buttonStyle(.plain)
                                     }
-                                    .padding(.top)
-                                    .buttonStyle(.plain)
+
+                                    
+//                                    Button {
+//                                        // start the breathwork sesson
+//
+//                                    } label: {
+//                                    }
                                 }
                             } label: {
                                 Text(breathSet.title)
@@ -64,6 +74,6 @@ struct BreathSetsView_Previews: PreviewProvider {
         
         HomeWorkoutsListView()
         .environmentObject(BreathSetsModel(storageProvider: StorageProvider.preview))
-//        .preferredColorScheme(.dark)
+        .preferredColorScheme(.dark)
     }
 }
