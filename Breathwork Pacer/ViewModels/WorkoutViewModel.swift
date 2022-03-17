@@ -27,16 +27,14 @@ class WorkoutViewModel: ObservableObject {
             
         }
         
-        let firstStep:BreathStep = breathSet.steps?.allObjects.first as! BreathStep
-        
         self.workout = Workout(breathSet: breathSet,
                                totalSecondsDuration: 60 * 20,
-                               currentStep: firstStep,
                                animationColor: Color.blue.description,
-                               soundControlType: SoundControl.SoundControlType.none,
-                               animationType: BreathAnimationTabView.BreathAnimationType.circleAnimationTag)
+                               soundControlType: SoundControlType.none,
+                               animationType: BreathAnimationType.circleAnimation)
     }
     
+    // MARK: - Colours
     func colorFromDescription(_ description:String) -> Color {
         
         let colorFromDescription = colours.filter { $0.description == description }
@@ -67,27 +65,30 @@ class WorkoutViewModel: ObservableObject {
         
     }
     
-    func changeAnimationTypeTo(_ selectedAnimation:BreathAnimationTabView.BreathAnimationType) {
+    // MARK: - Animation
+    func changeAnimationTypeTo(_ selectedAnimation:BreathAnimationType) {
         self.workout.changeAnimationTypeTo(selectedAnimation)
     }
     
+    
+    // MARK: - Time Calculations
     func getCountdownMinutes() -> Int {
         // floor start time - elapsed time / 60
-        let startSeconds = self.workout.totalSecondsDuration
-        let elapsedSeconds = self.workout.elapsedSecondsCount
-        let numSecondsInAMinute = 60
+        let startSeconds = Double(self.workout.totalSecondsDuration)
+        let totalElapsedTime = self.workout.totalElapsedTime
+        let numSecondsInAMinute = 60.0
         
-        return Int((startSeconds - elapsedSeconds) / numSecondsInAMinute)
+        return Int((startSeconds - totalElapsedTime) / numSecondsInAMinute)
     }
     
     func getCountdownSeconds() -> Int {
         // floor start time - elapsed time % 60
         
         let startSeconds = self.workout.totalSecondsDuration
-        let elapsedSeconds = self.workout.elapsedSecondsCount
+        let totalElapsedSeconds = self.workout.totalElapsedTime
         let numSecondsInAMinute = 60
         
-        return (startSeconds - elapsedSeconds) % numSecondsInAMinute
+        return (startSeconds - Int(totalElapsedSeconds)) % numSecondsInAMinute
     }
     
     func setNewTotalDurationFromMinutes(_ minutes:Int, seconds:Int) {
@@ -108,6 +109,7 @@ class WorkoutViewModel: ObservableObject {
         return self.workout.totalSecondsDuration % 60
     }
     
+    // MARK: - Timer Session Controls
     func pauseSession() {
         self.timer.invalidate()
         self.workout.setIsPlaying(false)
@@ -116,13 +118,29 @@ class WorkoutViewModel: ObservableObject {
     func playSession() {
         
         
-        self.timer = Timer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
+        self.timer = Timer(timeInterval: Constants.timerDelay, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
         RunLoop.current.add(timer, forMode: .common)
         
         self.workout.setIsPlaying(true)
     }
     
     @objc func fireTimer() {
-        self.workout.incrementElapsedTime()
+        // if elapsed time == total time, stop time and finish session
+        // this is handled inside the workout model.
+        self.workout.incrementElapsedTime(amount: Constants.timerDelay)
+        
+        if Int(self.workout.totalElapsedTime) >= self.workout.totalSecondsDuration {
+            self.timer.invalidate()
+        }
+    }
+    
+    // MARK: - BreathStep
+    func getStepActionText() -> String {
+        self.workout.currentStep.type.capitalized
+    }
+    
+    // MARK: - Sounds Controls
+    func changeSoundTypeTo(_ selectedSoundType:SoundControlType) {
+        self.workout.changeSoundTypeTo(selectedSoundType)
     }
 }

@@ -19,7 +19,7 @@ struct Constants {
     // MARK: - CoreData Models
     static let sortOrderKey = "sortOrder"
     
-    
-    
+    // MARK: - WorkoutViewModel
+    static let timerDelay = 0.1
     
 }

@@ -25,18 +25,48 @@ class StorageProvider: ObservableObject {
         breathSet.id = UUID()
         breathSet.sortOrder = 0
         breathSet.title = "Storage Provider Data"
-
-        for index in 0..<6 {
+        
+        
+        /// Generate random elements
+//        for index in 0..<4 {
+//            let newItem = BreathStep(context: storageProvider.persistentContainer.viewContext)
+//            newItem.id = UUID()
+//
+//            let i = Int.random(in: BreathStepType.allCases.indices)
+//            newItem.type = BreathStepType.allCases[i].rawValue
+//            newItem.duration = Double.random(in: 1.0...6.0)
+//            newItem.sortOrder = index
+//            newItem.breathSet = breathSet
+//
+//        }
+        
+        /// Generate a standard breath set to test
+        
+        func createBreathStep(type:BreathStepType, duration:Double, sortOrder:Int, breathSet:BreathSet) {
             let newItem = BreathStep(context: storageProvider.persistentContainer.viewContext)
             newItem.id = UUID()
-
-            let i = Int.random(in: BreathStepType.allCases.indices)
-            newItem.type = BreathStepType.allCases[i].rawValue
-            newItem.duration = Double.random(in: 1.0...6.0)
-            newItem.sortOrder = index
+            newItem.type = type.rawValue
+            newItem.duration = duration
+            newItem.sortOrder = sortOrder
             newItem.breathSet = breathSet
-
         }
+        
+        createBreathStep(type: .inhale,
+                         duration: 3.0,
+                         sortOrder: 0,
+                         breathSet: breathSet)
+        createBreathStep(type: .rest,
+                         duration: 2.0,
+                         sortOrder: 1,
+                         breathSet: breathSet)
+        createBreathStep(type: .exhale,
+                         duration: 3.0,
+                         sortOrder: 2,
+                         breathSet: breathSet)
+        createBreathStep(type: .rest,
+                         duration: 1.0,
+                         sortOrder: 3,
+                         breathSet: breathSet)
 //        storageProvider.loadAndParseJSONOnSuccess {
 //
 //        }

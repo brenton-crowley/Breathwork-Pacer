@@ -42,13 +42,6 @@ struct HomeWorkoutsListView: View {
                                             .padding(.top)
                                             .buttonStyle(.plain)
                                     }
-
-                                    
-//                                    Button {
-//                                        // start the breathwork sesson
-//
-//                                    } label: {
-//                                    }
                                 }
                             } label: {
                                 Text(breathSet.title)

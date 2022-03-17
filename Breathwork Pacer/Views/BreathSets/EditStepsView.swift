@@ -13,6 +13,14 @@ struct EditStepsView: View {
     @EnvironmentObject private var model:BreathSetsModel
     
     var breathSet:BreathSet?
+    var steps:[BreathStep] {
+        if let breathSet = breathSet {
+            let breathSteps = breathSet.steps?.allObjects as! [BreathStep]
+            return breathSteps.sorted(by: { $0.sortOrder < $1.sortOrder })
+        } else {
+            return []
+        }
+    }
     
     var body: some View {
         
@@ -28,7 +36,8 @@ struct EditStepsView: View {
                     .padding(.bottom)
                 
                 List {
-                    let steps = breathSet.steps?.allObjects as! [BreathStep]
+                    
+                    
                     ForEach(steps) { step in
                         LocalStepView(step: step)
                     }
@@ -37,7 +46,7 @@ struct EditStepsView: View {
                 }
                 
             }
-            .listStyle(.plain)
+//            .listStyle(.plain)
             .padding(0)
             .navigationBarTitleDisplayMode(.inline)
 
