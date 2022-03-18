@@ -15,6 +15,9 @@ class WorkoutViewModel: ObservableObject {
     let colours:[Color] = [.blue, .yellow, .red, .gray, .brown, .cyan, .green, .indigo, .mint, .orange, .pink, .purple]
     
     private var timer = Timer()
+    private var soundProvider = SoundProvider.shared
+    
+    // store a reference to the audio control as it can't be destroyed
     
     init(breathSet:BreathSet) {
         
@@ -32,6 +35,32 @@ class WorkoutViewModel: ObservableObject {
                                animationColor: Color.blue.description,
                                soundControlType: SoundControlType.none,
                                animationType: BreathAnimationType.circleAnimation)
+    }
+    
+    // MARK: - Sounds
+    
+    // start new sound
+    func playNewSound() {
+        soundProvider.playStepSound(self.workout.currentStep, forSoundType: self.workout.soundControlType)
+        
+    }
+    
+    func pauseSound() {
+        soundProvider.pauseSound()
+    }
+    
+    func resumeSound() {
+        soundProvider.resumeSound()
+    }
+    
+    // toggle playing
+    func toggleSoundPlaying() {
+        soundProvider.togglePlaying()
+    }
+    
+    // stop sound
+    func stopPlaying() {
+        soundProvider.stopSound()
     }
     
     // MARK: - Colours
@@ -84,11 +113,11 @@ class WorkoutViewModel: ObservableObject {
     func getCountdownSeconds() -> Int {
         // floor start time - elapsed time % 60
         
-        let startSeconds = self.workout.totalSecondsDuration
-        let totalElapsedSeconds = self.workout.totalElapsedTime
+        let totalSeconds = self.workout.totalSecondsDuration
+        let totalElapsedSeconds = Int(self.workout.totalElapsedTime.rounded(.up))
         let numSecondsInAMinute = 60
         
-        return (startSeconds - Int(totalElapsedSeconds)) % numSecondsInAMinute
+        return (totalSeconds - totalElapsedSeconds) % numSecondsInAMinute
     }
     
     func setNewTotalDurationFromMinutes(_ minutes:Int, seconds:Int) {
@@ -113,9 +142,12 @@ class WorkoutViewModel: ObservableObject {
     func pauseSession() {
         self.timer.invalidate()
         self.workout.setIsPlaying(false)
+        pauseSound()
     }
     
     func playSession() {
+        
+        if self.workout.totalElapsedTime == 0.0 { playNewSound() } else { resumeSound() }
         
         
         self.timer = Timer(timeInterval: Constants.timerDelay, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
@@ -127,8 +159,16 @@ class WorkoutViewModel: ObservableObject {
     @objc func fireTimer() {
         // if elapsed time == total time, stop time and finish session
         // this is handled inside the workout model.
+        let lastStep = self.workout.currentStep
         self.workout.incrementElapsedTime(amount: Constants.timerDelay)
         
+        // If the last step is different to the current step
+        // start new sound.
+        if lastStep != self.workout.currentStep {
+            playNewSound()
+        }
+        
+        // If we're at the end of the session, stop the timer.
         if Int(self.workout.totalElapsedTime) >= self.workout.totalSecondsDuration {
             self.timer.invalidate()
         }

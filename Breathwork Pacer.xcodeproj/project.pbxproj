@@ -35,6 +35,13 @@
 		848EFBC527D7218800F1D243 /* BreathStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848EFBC427D7218800F1D243 /* BreathStepView.swift */; };
 		84D197F527E052B60083983D /* StorageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D197F427E052B60083983D /* StorageProvider.swift */; };
 		84D197F727E059430083983D /* BreathSet+PreviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D197F627E059430083983D /* BreathSet+PreviewProvider.swift */; };
+		84EC1EF827E3FD5800C4AE63 /* SoundProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EC1EF727E3FD5800C4AE63 /* SoundProvider.swift */; };
+		84EC1F2127E41B2D00C4AE63 /* male-breath-out.wav in Resources */ = {isa = PBXBuildFile; fileRef = 84EC1F1B27E41B2D00C4AE63 /* male-breath-out.wav */; };
+		84EC1F2227E41B2D00C4AE63 /* yoga-exhale.wav in Resources */ = {isa = PBXBuildFile; fileRef = 84EC1F1C27E41B2D00C4AE63 /* yoga-exhale.wav */; };
+		84EC1F2427E41B2D00C4AE63 /* male-breath-in.wav in Resources */ = {isa = PBXBuildFile; fileRef = 84EC1F1E27E41B2D00C4AE63 /* male-breath-in.wav */; };
+		84EC1F2527E41B2D00C4AE63 /* yoga-inhale.wav in Resources */ = {isa = PBXBuildFile; fileRef = 84EC1F1F27E41B2D00C4AE63 /* yoga-inhale.wav */; };
+		84EC1F2627E41B2D00C4AE63 /* low-piano-note.wav in Resources */ = {isa = PBXBuildFile; fileRef = 84EC1F2027E41B2D00C4AE63 /* low-piano-note.wav */; };
+		84EC1F2827E41CC300C4AE63 /* high-piano-note.wav in Resources */ = {isa = PBXBuildFile; fileRef = 84EC1F2727E41CC300C4AE63 /* high-piano-note.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +74,13 @@
 		848EFBC427D7218800F1D243 /* BreathStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathStepView.swift; sourceTree = "<group>"; };
 		84D197F427E052B60083983D /* StorageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageProvider.swift; sourceTree = "<group>"; };
 		84D197F627E059430083983D /* BreathSet+PreviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "BreathSet+PreviewProvider.swift"; path = "Breathwork Pacer/Data/Core Data/BreathSet+PreviewProvider.swift"; sourceTree = SOURCE_ROOT; };
+		84EC1EF727E3FD5800C4AE63 /* SoundProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundProvider.swift; sourceTree = "<group>"; };
+		84EC1F1B27E41B2D00C4AE63 /* male-breath-out.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "male-breath-out.wav"; path = "Breathwork Pacer/Sounds/male-breath-out.wav"; sourceTree = SOURCE_ROOT; };
+		84EC1F1C27E41B2D00C4AE63 /* yoga-exhale.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "yoga-exhale.wav"; path = "Breathwork Pacer/Sounds/yoga-exhale.wav"; sourceTree = SOURCE_ROOT; };
+		84EC1F1E27E41B2D00C4AE63 /* male-breath-in.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "male-breath-in.wav"; path = "Breathwork Pacer/Sounds/male-breath-in.wav"; sourceTree = SOURCE_ROOT; };
+		84EC1F1F27E41B2D00C4AE63 /* yoga-inhale.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "yoga-inhale.wav"; path = "Breathwork Pacer/Sounds/yoga-inhale.wav"; sourceTree = SOURCE_ROOT; };
+		84EC1F2027E41B2D00C4AE63 /* low-piano-note.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "low-piano-note.wav"; path = "Breathwork Pacer/Sounds/low-piano-note.wav"; sourceTree = SOURCE_ROOT; };
+		84EC1F2727E41CC300C4AE63 /* high-piano-note.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "high-piano-note.wav"; path = "Breathwork Pacer/Sounds/high-piano-note.wav"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +114,7 @@
 		840FE2AD27D5D28A00B574C4 /* Breathwork Pacer */ = {
 			isa = PBXGroup;
 			children = (
+				84EC1F1A27E41AFB00C4AE63 /* Audio */,
 				840FE2B227D5D28A00B574C4 /* Assets.xcassets */,
 				840FE2C127D5D29400B574C4 /* Data */,
 				840FE2B427D5D28A00B574C4 /* Preview Content */,
@@ -207,6 +222,7 @@
 				846B990027E004F3009367F6 /* Constants.swift */,
 				8431D62F27E29B5F00D98711 /* Enums.swift */,
 				8431D63727E2D9E200D98711 /* Animatables.swift */,
+				84EC1EF727E3FD5800C4AE63 /* SoundProvider.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -217,6 +233,19 @@
 				848EFBC427D7218800F1D243 /* BreathStepView.swift */,
 			);
 			path = BreathStep;
+			sourceTree = "<group>";
+		};
+		84EC1F1A27E41AFB00C4AE63 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				84EC1F2727E41CC300C4AE63 /* high-piano-note.wav */,
+				84EC1F2027E41B2D00C4AE63 /* low-piano-note.wav */,
+				84EC1F1E27E41B2D00C4AE63 /* male-breath-in.wav */,
+				84EC1F1B27E41B2D00C4AE63 /* male-breath-out.wav */,
+				84EC1F1C27E41B2D00C4AE63 /* yoga-exhale.wav */,
+				84EC1F1F27E41B2D00C4AE63 /* yoga-inhale.wav */,
+			);
+			path = Audio;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,8 +307,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				8457F0EB27DFF8740059D627 /* default_workouts.json in Resources */,
+				84EC1F2527E41B2D00C4AE63 /* yoga-inhale.wav in Resources */,
+				84EC1F2427E41B2D00C4AE63 /* male-breath-in.wav in Resources */,
 				840FE2B627D5D28A00B574C4 /* Preview Assets.xcassets in Resources */,
+				84EC1F2627E41B2D00C4AE63 /* low-piano-note.wav in Resources */,
+				84EC1F2127E41B2D00C4AE63 /* male-breath-out.wav in Resources */,
 				840FE2B327D5D28A00B574C4 /* Assets.xcassets in Resources */,
+				84EC1F2227E41B2D00C4AE63 /* yoga-exhale.wav in Resources */,
+				84EC1F2827E41CC300C4AE63 /* high-piano-note.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,6 +341,7 @@
 				840FE2AF27D5D28A00B574C4 /* Breathwork_PacerApp.swift in Sources */,
 				846B98FD27E00133009367F6 /* BreathStep+CoreDataClass.swift in Sources */,
 				8410EF7227E14F550046FC12 /* WorkoutView.swift in Sources */,
+				84EC1EF827E3FD5800C4AE63 /* SoundProvider.swift in Sources */,
 				846B98FE27E00133009367F6 /* BreathStep+CoreDataProperties.swift in Sources */,
 				848EFBBE27D7126C00F1D243 /* Enumerations.swift in Sources */,
 				8431D63427E29BC400D98711 /* BreathAnimationTabView.swift in Sources */,

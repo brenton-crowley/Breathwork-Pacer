@@ -53,7 +53,7 @@ struct SoundControl:View {
             HStack {
                 Picker("", selection: $selectedSoundType) {
                     ForEach(SoundControlType.allCases, id: \.self) { soundType in
-                        Text(String(soundType.rawValue))
+                        Text(String(soundType.rawValue.capitalized))
                             .tag(soundType)
                     }
                 }

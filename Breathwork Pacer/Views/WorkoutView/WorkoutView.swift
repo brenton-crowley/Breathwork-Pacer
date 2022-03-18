@@ -59,6 +59,7 @@ struct WorkoutView: View {
         .onDisappear {
             viewModel.pauseSession()
         }
+        
     }
 }
 

@@ -39,7 +39,7 @@ struct HomeWorkoutsListView: View {
                                     } label: {
                                         Label("Go to Session", systemImage: "clock")
                                             .scaleEffect(1.5)
-                                            .padding(.top)
+                                            .padding(.vertical)
                                             .buttonStyle(.plain)
                                     }
                                 }
