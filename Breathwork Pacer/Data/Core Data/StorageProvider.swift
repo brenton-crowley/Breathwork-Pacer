@@ -287,5 +287,42 @@ extension StorageProvider {
         // If an error occured, return nothing
         return []
     }
+}
+
+// BreatStep Access
+extension StorageProvider {
     
+    func breathStepForId(_ id:UUID) -> BreathStep? {
+        
+        var step:BreathStep?
+        
+        let fetchRequest: NSFetchRequest<BreathStep> = BreathStep.fetchRequest()
+        fetchRequest.fetchLimit = 1
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id.uuidString)
+        
+        do {
+            step = try persistentContainer.viewContext.fetch(fetchRequest).first
+        } catch {
+            print(error)
+        }
+        
+        return step
+    }
+    
+    func updateStep() {
+        
+        do {
+            // Tell SwiftUI that the list of steps is being modified
+            objectWillChange.send()
+            
+            // Actually persist/save the changes to the managed object context
+            try persistentContainer.viewContext.save()
+            print("BreathSet updated.")
+            
+        } catch {
+            persistentContainer.viewContext.rollback()
+            print("Failed to save context: \(error)")
+        }
+        
+    }
 }

@@ -16,6 +16,7 @@ class WorkoutViewModel: ObservableObject {
     
     private var timer = Timer()
     private var soundProvider = SoundProvider.shared
+    private var settings = Settings.shared
     
     // store a reference to the audio control as it can't be destroyed
     
@@ -31,10 +32,10 @@ class WorkoutViewModel: ObservableObject {
         }
         
         self.workout = Workout(breathSet: breathSet,
-                               totalSecondsDuration: 60 * 20,
-                               animationColor: Color.blue.description,
-                               soundControlType: SoundControlType.none,
-                               animationType: BreathAnimationType.circleAnimation)
+                               totalSecondsDuration: settings.defaultTimer,
+                               animationColor: settings.defaultColor,
+                               soundControlType: settings.defaultSoundType,
+                               animationType: settings.defaultAnimationType)
     }
     
     // MARK: - Sounds
@@ -92,11 +93,13 @@ class WorkoutViewModel: ObservableObject {
         
         self.workout.changeAnimationColorTo(colours[currentIndex+1].description)
         
+        settings.saveDefaultColorTo(self.workout.animationColor.description)
     }
     
     // MARK: - Animation
     func changeAnimationTypeTo(_ selectedAnimation:BreathAnimationType) {
         self.workout.changeAnimationTypeTo(selectedAnimation)
+        settings.saveDefaultAnimationTo(selectedAnimation.rawValue)
     }
     
     
@@ -125,17 +128,21 @@ class WorkoutViewModel: ObservableObject {
         let totalSeconds = minutes * 60 + seconds
         self.workout.updateTotalSecondsDurationTo(totalSeconds: totalSeconds)
         self.workout.resetElapsedTime()
-        // TODO: Update User Defaults with this value
+    }
+    
+    func saveDefaultTimerDuration(_ minutes:Int, _ seconds:Int) {
+        let totalSeconds = minutes * 60 + seconds
+        settings.saveDefaultTimerTo(totalSeconds)
     }
     
     func getDefaultMinutes() -> Int {
         // TODO: Probably need to update this to user defaults, but we'll use workout for now
-        return Int(self.workout.totalSecondsDuration / 60)
+        return Int(settings.defaultTimer / 60)
     }
     
     func getDefaultSeconds() -> Int {
         // TODO: Probably need to update this to user defaults, but we'll use workout for now
-        return self.workout.totalSecondsDuration % 60
+        return settings.defaultTimer % 60
     }
     
     // MARK: - Timer Session Controls
@@ -182,5 +189,6 @@ class WorkoutViewModel: ObservableObject {
     // MARK: - Sounds Controls
     func changeSoundTypeTo(_ selectedSoundType:SoundControlType) {
         self.workout.changeSoundTypeTo(selectedSoundType)
+        settings.saveDefaultSoundTo(selectedSoundType.rawValue)
     }
 }

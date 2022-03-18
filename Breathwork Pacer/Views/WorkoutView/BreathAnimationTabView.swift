@@ -94,6 +94,8 @@ struct BreathAnimationTabView:View {
                     .scaleEffect(0.99)
                 Circle()
                     .scaleEffect(scaleSize)
+                Circle()
+                    .opacity(0)
             }
         }
         
@@ -105,6 +107,8 @@ struct BreathAnimationTabView:View {
         
         var body: some View {
             ZStack {
+                Rectangle()
+                    .opacity(0)
                 Rectangle()
                     .stroke()
                     .scaleEffect(0.99)

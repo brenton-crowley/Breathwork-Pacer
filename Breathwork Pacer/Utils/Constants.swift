@@ -11,10 +11,10 @@ struct Constants {
     
     // MARK: - UserDefaults
     static let dataIsPreloadedKey = "dataIsPreloaded"
-    static let workoutDurationKey = "workoutDuration"
-    static let breathAnimationColorKey = "breathAnimationColor"
-    static let soundControlTypeKey = "soundControlType"
-    static let animationTypeKey = "animationType"
+    static let defaultTimerDurationKey = "defaultTimerDuration"
+    static let defaultColorKey = "defaultColor"
+    static let defaultSoundKey = "defaultSound"
+    static let defaultAnimationKey = "defaultAnimation"
     
     // MARK: - CoreData Models
     static let sortOrderKey = "sortOrder"

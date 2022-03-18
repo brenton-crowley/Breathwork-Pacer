@@ -18,7 +18,7 @@ struct HomeWorkoutsListView: View {
             // List of sets pulled from Core Data
             if let breathSets = model.breathSets {
                 VStack(alignment: .center, spacing: 0) {
-                    Text("Choose a workout")
+                    Text("Breath Workouts")
                         .font(.title)
                         .padding()
                     List {

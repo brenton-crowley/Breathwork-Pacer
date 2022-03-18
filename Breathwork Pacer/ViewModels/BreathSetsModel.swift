@@ -70,5 +70,22 @@ class BreathSetsModel: ObservableObject {
         self.breathSets = self.storageProvider.breathSets
     }
     
+    // MARK: - BreathStep Core Data Modifications
+    func updateBreathStepDurationTo(_ duration:Double, forID id:UUID) {
+        
+        if let step = storageProvider.breathStepForId(id) {
+            step.duration = duration
+            storageProvider.updateStep()
+            print("Saved duration to \(duration)")
+        }
+    }
     
+    func updateBreathStepTypeTo(_ type:String, forID id:UUID) {
+        
+        if let step = storageProvider.breathStepForId(id) {
+            step.type = type
+            storageProvider.updateStep()
+            print("Saved type to \(type)")
+        }
+    }
 }

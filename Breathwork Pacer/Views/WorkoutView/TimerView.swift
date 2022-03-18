@@ -93,7 +93,8 @@ struct TimerView:View {
                                       newMinutes: minutes,
                                       newSeconds: seconds,
                                       isEditing: $isEditing) {
-                        viewModel.setNewTotalDurationFromMinutes(minutes, seconds: seconds)
+//                        viewModel.setNewTotalDurationFromMinutes(minutes, seconds: seconds)
+                        viewModel.saveDefaultTimerDuration(minutes, seconds)
                     }
                     Spacer()
                     // MARK: - Accept the current Time duration
