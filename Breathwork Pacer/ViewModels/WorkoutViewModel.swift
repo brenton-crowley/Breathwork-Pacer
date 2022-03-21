@@ -24,8 +24,6 @@ class WorkoutViewModel: ObservableObject {
         
         let isFirstRun = UserDefaults.standard.bool(forKey: Constants.dataIsPreloadedKey)
         
-//        let defaults = UserDefaults.standard
-        
         // create workout based on UserDefaults
         if isFirstRun {
             
@@ -126,7 +124,7 @@ class WorkoutViewModel: ObservableObject {
     func setNewTotalDurationFromMinutes(_ minutes:Int, seconds:Int) {
         
         let totalSeconds = minutes * 60 + seconds
-        self.workout.updateTotalSecondsDurationTo(totalSeconds: totalSeconds)
+        settings.saveDefaultTimerTo(totalSeconds)
         self.workout.resetElapsedTime()
     }
     

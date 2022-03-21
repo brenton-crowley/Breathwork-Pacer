@@ -74,14 +74,10 @@ class SoundProvider {
         
         if let filename = filename {
             
-            print("Sound filename: \(filename)")
-            
             let url = Bundle.main.url(forResource: filename, withExtension: "wav")
             
             if let url = url {
                 do {
-                    print("Play URL: \(url)")
-                    
                     return try AVAudioPlayer(contentsOf: url)
                 } catch {
                     print("Couldn't load the sound")

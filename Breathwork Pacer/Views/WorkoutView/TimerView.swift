@@ -79,24 +79,24 @@ struct TimerView:View {
                 
                 VStack {
                     // MARK: - Reset the Timer to the saved duration.
-                    TimerPickerButton(systemImageName: "gobackward",
-                                      newMinutes: viewModel.getDefaultMinutes(),
-                                      newSeconds: viewModel.getDefaultSeconds(),
-                                      isEditing: $isEditing) {
-
-                        self.minutes = viewModel.getDefaultMinutes()
-                        self.seconds = viewModel.getDefaultSeconds()
-                    }
-                    Spacer()
+//                    TimerPickerButton(systemImageName: "gobackward",
+//                                      newMinutes: viewModel.getDefaultMinutes(),
+//                                      newSeconds: viewModel.getDefaultSeconds(),
+//                                      isEditing: $isEditing) {
+//
+//                        self.minutes = viewModel.getDefaultMinutes()
+//                        self.seconds = viewModel.getDefaultSeconds()
+//                    }
+//                    Spacer()
                     // MARK: - Save new Timer default duration
-                    TimerPickerButton(systemImageName: "bookmark.circle",
-                                      newMinutes: minutes,
-                                      newSeconds: seconds,
-                                      isEditing: $isEditing) {
-//                        viewModel.setNewTotalDurationFromMinutes(minutes, seconds: seconds)
-                        viewModel.saveDefaultTimerDuration(minutes, seconds)
-                    }
-                    Spacer()
+//                    TimerPickerButton(systemImageName: "bookmark.circle",
+//                                      newMinutes: minutes,
+//                                      newSeconds: seconds,
+//                                      isEditing: $isEditing) {
+////                        viewModel.setNewTotalDurationFromMinutes(minutes, seconds: seconds)
+//                        viewModel.saveDefaultTimerDuration(minutes, seconds)
+//                    }
+//                    Spacer()
                     // MARK: - Accept the current Time duration
                     TimerPickerButton(systemImageName: "checkmark.circle",
                                       newMinutes: minutes,

@@ -14,11 +14,12 @@ struct Workout {
     // TODO: - Handle for decimal amounts and change to a Double
     private(set) var totalElapsedTime:Double = 0
     private(set) var breathSet:BreathSet
-    private(set) var totalSecondsDuration:Int
     private(set) var currentStepIndex:Int = 0
     private(set) var animationColor:String
     private(set) var soundControlType:SoundControlType
     private(set) var animationType:BreathAnimationType
+    
+    var totalSecondsDuration:Int { Settings.shared.defaultTimer }
     
     var currentStep:BreathStep {
         guard self.currentStepIndex < steps.count else { return steps.first! }
@@ -44,7 +45,6 @@ struct Workout {
          animationType:BreathAnimationType) {
         
         self.breathSet = breathSet
-        self.totalSecondsDuration = totalSecondsDuration
         self.animationColor = animationColor
         self.soundControlType = soundControlType
         self.animationType = animationType
@@ -56,10 +56,6 @@ struct Workout {
     
     mutating func changeAnimationTypeTo(_ selectedAnimation:BreathAnimationType) {
         self.animationType = selectedAnimation
-    }
-    
-    mutating func updateTotalSecondsDurationTo(totalSeconds:Int) {
-        self.totalSecondsDuration = totalSeconds
     }
     
     mutating func toggleIsPlaying() {
