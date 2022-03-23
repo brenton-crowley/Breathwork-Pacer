@@ -186,7 +186,7 @@ extension StorageProvider {
             // Persist the data in this managed object context to the underlying store
             try persistentContainer.viewContext.save()
             
-            print("Movie saved successfully")
+            print("Breath Set saved successfully")
             
             // Refresh the list of movies
             self.breathSets = getAllBreathSets()
@@ -194,7 +194,7 @@ extension StorageProvider {
         } catch {
             
             // Something went wrong 😭
-            print("Failed to save movie: \(error)")
+            print("Failed to save breath set: \(error)")
             
             // Rollback any changes in the managed object context
             persistentContainer.viewContext.rollback()
@@ -225,7 +225,7 @@ extension StorageProvider {
             
             print("BreathSet Deleted deleted.")
             
-            // Refresh the list of movies
+            // Refresh the list of breath sets
             breathSets = getAllBreathSets()
             
         } catch {
@@ -322,6 +322,28 @@ extension StorageProvider {
         } catch {
             persistentContainer.viewContext.rollback()
             print("Failed to save context: \(error)")
+        }
+        
+    }
+    
+    func deleteStep(_ step:BreathStep) {
+        
+        persistentContainer.viewContext.delete(step)
+        
+        do {
+            
+            try persistentContainer.viewContext.save()
+            
+            print("Step Deleted deleted.")
+            
+            // Refresh the list of breath sets
+            breathSets = getAllBreathSets()
+            
+        } catch {
+            
+            persistentContainer.viewContext.rollback()
+            print("Failed to save context: \(error)")
+            
         }
         
     }

@@ -9,191 +9,183 @@ import SwiftUI
 
 struct BreathStepView: View {
     
+    private typealias ConstantsBreathStepView = BreathStepView.Constants
+    
+    private struct Constants {
+        
+        // Chell
+        static let cellHeight:CGFloat = 120
+        
+        // Opacity
+        static let opaque:CGFloat = 1
+        static let transparent:CGFloat = 0
+        
+        // EditView
+        static let offsetValue:CGFloat = 40
+        static let activeValue:CGFloat = 0
+        static let stepperChangeAmount:CGFloat = 0.1
+        
+    }
+    
+    @EnvironmentObject var home:BreathSetsModel
     
     @State private var isFocused = false
     @State var stepType:BreathStepType
     @State var duration:Double
     
+    @FocusState var durationIsFocused: Bool
+        
     let breathStepId:UUID
+    let parentIsEditing:Bool
 
-//    init(id:UUID, stepType:BreathStepType, duration:Double, isFocused:Bool, isParentEditing:Bool) {
-//        self.breathStepId = id
-//        self.stepType = stepType
-//        self.duration = duration
-//        self.isFocused = isFocused
-//    }
-//
-//    init(id:UUID, stepType:BreathStepType, duration:Double) {
-//        self.breathStepId = id
-//        self.stepType = stepType
-//        self.duration = duration
-//        self.isFocused = false
-//    }
-//
-//    init(id:UUID) {
-//        self.breathStepId = id
-//        self.stepType = BreathStepType.inhale
-//        self.duration = 6.0
-//        self.isFocused = false
-//    }
-    
     var body: some View {
-    
-        ZStack {
+        
+        let container = ZStack {
             
-            Background(stepType: $stepType)
+            let background = Rectangle()
+            let editingView = editingView()
+            let displayView = displayView(stepTypeText: stepType.rawValue.capitalized)
+            
+            background
+                .foregroundColor(colorForStepType())
                 .onTapGesture {
                     isFocused.toggle()
                 }
             
+            // content
             ZStack {
                 // Build both views but only display
-                EditingView(breathStepId: breathStepId, stepType: $stepType, duration: $duration, isEditing: isFocused)
-                    .opacity(isFocused ? 1 : 0)
-                    .offset(y: isFocused ? 0 : -40)
-//                    .scaleEffect(isFocused ? 1 : 0.8)
+                editingView
+                    .opacity(isFocused ? ConstantsBreathStepView.opaque : ConstantsBreathStepView.transparent)
+                    .offset(y: isFocused ? ConstantsBreathStepView.activeValue : -Constants.offsetValue)
                 
-                DisplayView(stepTypeText: stepType.rawValue.capitalized,
-                            duration: duration)
-                    .opacity(isFocused ? 0 : 1)
-                    .offset(y: isFocused ? 40 : 0)
+                displayView
+                    .opacity(isFocused ? ConstantsBreathStepView.transparent : ConstantsBreathStepView.opaque)
+                    .offset(y: isFocused ? ConstantsBreathStepView.offsetValue : ConstantsBreathStepView.activeValue)
                     .foregroundColor(BreathSetsModel.colorScheme == .light ? .white : .black)
-//                    .blur(radius: isFocused ? 15 : 0)
             }
             .padding(.horizontal)
             .animation(.easeInOut, value: isFocused)
         }
-        .frame(height: 120)
+        
+        container
+            .frame(height: ConstantsBreathStepView.cellHeight)
         
     }
     
-    struct Background:View {
+    private func colorForStepType() -> Color {
         
-        @Binding var stepType:BreathStepType
-        
-        var body: some View {
-            Rectangle()
-                .foregroundColor(colorForStepType())
-            
-        }
-        
-        func colorForStepType() -> Color {
-            
-            switch stepType {
-            case .inhale:
-                return Color.pink
-            case .exhale:
-                return Color.cyan
-            case .rest:
-                return Color.orange
-            }
-            
-        }
-    }
-    
-    struct DisplayView:View {
-        
-        let stepTypeText:String
-        let duration:Double
-        var durationString:String {
-            
-            let formatter = NumberFormatter()
-            formatter.minimumFractionDigits = 1
-            formatter.maximumFractionDigits = 1
-            
-            return String(formatter.string(from: NSNumber(value:duration)) ?? "Nope")
-            
-        }
-        
-        var body: some View {
-            HStack {
-                Text(stepTypeText)
-                    .font(.system(.title, design: .rounded))
-                    .fontWeight(.heavy)
-                    .padding(.horizontal)
-                Spacer()
-                Text("\(durationString) \nseconds")
-                    .padding(.horizontal)
-                    .font(.system(.title3, design: .rounded))
-            }
+        switch stepType {
+        case .inhale:
+            return Color.pink
+        case .exhale:
+            return Color.cyan
+        case .rest:
+            return Color.orange
         }
         
     }
     
-    struct EditingView:View {
+    @ViewBuilder
+    private func displayView(stepTypeText:String) -> some View {
         
-        @EnvironmentObject var viewModel:BreathSetsModel
-        
-        let breathStepId:UUID
-        @Binding var stepType:BreathStepType
-        @Binding var duration:Double
-        @FocusState var durationIsFocused: Bool
-        let isEditing:Bool
-        
-        var formatter: NumberFormatter {
-            
-            let f = NumberFormatter()
-            f.usesSignificantDigits = true
-            f.minimumSignificantDigits = 2
-            f.maximumSignificantDigits = 2
-            return f
+        HStack {
+            Text(stepTypeText)
+                .font(.system(.title, design: .rounded))
+                .fontWeight(.heavy)
+                .padding(.horizontal)
+            Spacer()
+            Text("\(durationString()) \nseconds")
+                .padding(.horizontal)
+                .font(.system(.title3, design: .rounded))
         }
         
-        var body: some View {
-            VStack (alignment: .leading) {
+    }
+    
+    @ViewBuilder
+    private func editingView() -> some View {
+        
+        VStack (alignment: .leading) {
+            
+            // Step Type
+            let stepTypeControl = HStack {
                 
-                // Step Type
-                HStack {
-                    Text("Step Type: ")
-                        .font(.title3)
-                        .foregroundColor(BreathSetsModel.colorScheme == .light ? .white : .black)
-                    Picker("", selection: $stepType) {
-                        Text(BreathStepType.inhale.rawValue.capitalized)
-                            .tag(BreathStepType.inhale)
-                        Text(BreathStepType.exhale.rawValue.capitalized)
-                            .tag(BreathStepType.exhale)
-                        Text(BreathStepType.rest.rawValue.capitalized)
-                            .tag(BreathStepType.rest)
-                    }
+                let stepLabel = Text("Step Type: ")
+                let breathTypeSegment = Picker("", selection: $stepType) {
+                    
+                    let inhaleText = Text(BreathStepType.inhale.rawValue.capitalized)
+                    let exhaleText = Text(BreathStepType.exhale.rawValue.capitalized)
+                    let restText = Text(BreathStepType.rest.rawValue.capitalized)
+                    
+                    inhaleText.tag(BreathStepType.inhale)
+                    exhaleText.tag(BreathStepType.exhale)
+                    restText.tag(BreathStepType.rest)
+                }
+
+                stepLabel
+                    .font(.title3)
+                    .foregroundColor(BreathSetsModel.colorScheme == .light ? .white : .black)
+
+                breathTypeSegment
                     .pickerStyle(.segmented)
                     .colorMultiply(.white)
                     .onChange(of: stepType) { newValue in
                         // TODO: call the view model to change the step type to the value that's selected.
-                        viewModel.updateBreathStepTypeTo(stepType.rawValue, forID: breathStepId)
+                        home.updateBreathStepTypeTo(stepType.rawValue, forID: breathStepId)
                     }
-                }
+            }
+            // Duration
+            let durationControl = HStack {
                 
+                let durationLabel = Text("Duration:")
+                let durationTextfield = TextField("Duration", value: $duration, formatter: editingViewNumberFormatter())
                 
-                // Duration
-                HStack {
-                    
-                    Text("Duration:")
-                        .font(.title3)
-                        .foregroundColor(BreathSetsModel.colorScheme == .light ? .white : .black)
-                    Spacer()
-                    TextField("Duration", value: $duration, formatter: formatter)
-                        .textFieldStyle(.roundedBorder)
-                    //                        .border(.blue, width: 1.0)
-                        .keyboardType(.decimalPad)
-                        .focused($durationIsFocused)
-                    if durationIsFocused {
-                        Button("Done") {
-                            durationIsFocused = false
-                        }
-                        .buttonStyle(.plain)
-                    } else {
-                        Stepper("", value: $duration, step: 0.1)
+                durationLabel
+                    .font(.title3)
+                    .foregroundColor(BreathSetsModel.colorScheme == .light ? .white : .black)
+                Spacer()
+                durationTextfield
+                    .textFieldStyle(.roundedBorder)
+                    .keyboardType(.decimalPad)
+                    .focused($durationIsFocused)
+                
+                // Trailing Control
+                if durationIsFocused {
+                    Button("Done") {
+                        durationIsFocused = false
                     }
-                }
-                .onChange(of: duration) { newValue in
-                    // TODO: call the view model to change the duration value of the breath step
-                    viewModel.updateBreathStepDurationTo(duration, forID: breathStepId)
-                    
+                    .buttonStyle(.plain)
+                } else {
+                    Stepper("", value: $duration, step: ConstantsBreathStepView.stepperChangeAmount)
                 }
             }
+            
+            stepTypeControl
+            durationControl
+                .onChange(of: duration) { newValue in
+                    // TODO: call the view model to change the duration value of the breath step
+                    home.updateBreathStepDurationTo(duration, forID: breathStepId)
+                }
         }
         
     }
+    
+    private func durationString() -> String {
+        let formatter = NumberFormatter()
+        formatter.minimumFractionDigits = 1
+        formatter.maximumFractionDigits = 1
+        
+        return String(formatter.string(from: NSNumber(value:duration)) ?? "Nope")
+    }
+    
+    private func editingViewNumberFormatter() -> NumberFormatter {
+        let f = NumberFormatter()
+            f.usesSignificantDigits = true
+            f.minimumSignificantDigits = 2
+            f.maximumSignificantDigits = 2
+        return f
+    }
+    
 }
 
 
@@ -204,7 +196,7 @@ struct BreathStepView_Previews: PreviewProvider {
         let breathSet = BreathSet.example
         let step:BreathStep = breathSet.steps?.allObjects.first! as! BreathStep
         let stepType = BreathStepType.stepTypeForString(step.type)
-        BreathStepView(stepType: stepType, duration: step.duration, breathStepId: step.id)
+        BreathStepView(stepType: stepType, duration: step.duration, breathStepId: step.id, parentIsEditing: true)
         .environmentObject(BreathSetsModel(storageProvider: StorageProvider.preview))
 //            .preferredColorScheme(.dark)
     }

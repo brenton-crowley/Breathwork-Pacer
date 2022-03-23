@@ -15,6 +15,7 @@ struct Breathwork_PacerApp: App {
     
     var body: some Scene {
         WindowGroup {
+
             HomeWorkoutsListView()
                 .environmentObject(storageProvider)
                 .environmentObject(BreathSetsModel(storageProvider: storageProvider))

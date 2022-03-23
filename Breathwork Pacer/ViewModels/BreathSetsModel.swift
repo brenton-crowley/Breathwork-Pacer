@@ -88,4 +88,66 @@ class BreathSetsModel: ObservableObject {
             print("Saved type to \(type)")
         }
     }
+    
+    func move(fromOffsets: IndexSet, toOffset: Int) {
+        // locate the current index of the item to move
+        
+        print("fromOffsets: \(fromOffsets.description). toOffset: \(toOffset)")
+        
+    }
+    
+    func delete(fromOffsets: IndexSet) {
+        
+        
+    }
+    
+    func addStepInSteps(_ steps:[BreathStep], forBreathSet breathSet:BreathSet) {
+        let index = (steps.last?.sortOrder ?? -1 ) + 1
+        let step = generateBreathStepAtIndex(index)
+        step.breathSet = breathSet
+        
+        storageProvider.saveBreathSet(breathSet)
+    }
+    
+    func addStepAtIndex(_ index:Int, toBreathSet breathSet:BreathSet) {
+        // provide the breath step
+        let step = generateBreathStepAtIndex()
+        // loop through all the steps in breath steps from the current step
+        var steps = breathSet.steps?.allObjects as! [BreathStep]
+        
+        if steps.count > 0 {
+            steps.sort { $0.sortOrder < $1.sortOrder }
+            
+            // start at the index proided - 1
+            // change the sort orders of the indexes
+            
+            for i in index..<steps.count {
+                let s = steps[i]
+                s.sortOrder = i + 1
+            }
+        }
+        
+        
+        breathSet.addToSteps(step)
+        storageProvider.saveBreathSet(breathSet)
+    }
+    
+    func generateBreathStepAtIndex(_ index:Int = 0) -> BreathStep {
+        let step = BreathStep(context: viewContext)
+        step.id = UUID()
+        step.duration = 3.0
+        step.type = BreathStepType.inhale.rawValue
+        step.sortOrder = index
+        return step
+    }
+    
+    func addStepToBreathSet(_ breathSet:BreathSet) {
+        
+        if let steps = breathSet.steps {
+            addStepAtIndex(steps.allObjects.count, toBreathSet: breathSet)
+        } else {
+            addStepAtIndex(0, toBreathSet: breathSet)
+        }
+        
+    }
 }
