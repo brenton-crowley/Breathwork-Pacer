@@ -9,82 +9,72 @@ import SwiftUI
 
 struct SoundControl:View {
     
-    @EnvironmentObject var viewModel:WorkoutViewModel
+    private struct Constants {
+        static let iconSize:CGSize = CGSize(width: 20, height: 20)
+        static let zeroSpacing:CGFloat = 0
+        static let hasSoundImage = "speaker.wave.3"
+        static let noSoundImage = "speaker"
+    }
+    
+    @EnvironmentObject var workoutModel:WorkoutViewModel
     
     @State var isEditing:Bool = false
+    @State var selectedSoundType:SoundControlType = .yoga
     
     var body: some View {
-        HStack (spacing: 0) {
-            let soundType = viewModel.workout.soundControlType
-            let systemImage = soundType == .none ? "speaker" : "speaker.wave.3"
-            Image(systemName: systemImage)
+        
+        let container = HStack (spacing: Constants.zeroSpacing) {
+            let soundType = workoutModel.workout.soundControlType
+            let soundImage = soundType == .none ? Constants.noSoundImage : Constants.hasSoundImage
+            Image(systemName: soundImage)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 20, height: 20)
+                .frame(width: Constants.iconSize.width, height: Constants.iconSize.height)
                 .padding(.trailing)
             
-            if isEditing {
-                EditSoundControl(selectedSoundType: viewModel.workout.soundControlType,
-                                 isEditing: $isEditing)
-            } else {
-                DisplaySoundControl()
-                    .onTapGesture {
-                        withAnimation {
-                            self.isEditing = true
-                        }
-                    }
-            }
+            if isEditing { editControl() } else { displayControl() }
         }
-        .padding(.horizontal)
+        
+        container
+            .padding(.horizontal)
+            .onAppear {
+                self.selectedSoundType = workoutModel.workout.soundControlType
+            }
         
     }
     
-    struct EditSoundControl:View {
-        
-        @EnvironmentObject var viewModel:WorkoutViewModel
-        @State var selectedSoundType:SoundControlType
-        @Binding var isEditing:Bool
-        
-        var body: some View {
-            
-            // Sound Icon
-            
-            // SegmentedControl
-            HStack {
-                Picker("", selection: $selectedSoundType) {
-                    ForEach(SoundControlType.allCases, id: \.self) { soundType in
-                        Text(String(soundType.rawValue.capitalized))
-                            .tag(soundType)
-                    }
+    @ViewBuilder
+    private func editControl() -> some View {
+        HStack {
+            Picker("", selection: $selectedSoundType) {
+                ForEach(SoundControlType.allCases, id: \.self) { soundType in
+                    Text(String(soundType.rawValue.capitalized))
+                        .tag(soundType)
                 }
-                .pickerStyle(.segmented)
-                .onAppear(perform: {
-                    self.selectedSoundType = viewModel.workout.soundControlType
-                })
-                .onChange(of: selectedSoundType) { newValue in
-                    // update viewModel to new sound
-                    viewModel.changeSoundTypeTo(selectedSoundType)
-                }
-                
-                
-                Button("Done") {
-                    withAnimation {
-                        isEditing = false
-                    }
+            }
+            .pickerStyle(.segmented)
+            .onChange(of: selectedSoundType) { newValue in
+                // update viewModel to new sound
+                workoutModel.changeSoundTypeTo(selectedSoundType)
+            }
+            
+            
+            Button("Done") {
+                withAnimation {
+                    isEditing = false
                 }
             }
         }
-        
     }
     
-    struct DisplaySoundControl:View {
-        
-        @EnvironmentObject var viewModel:WorkoutViewModel
-        
-        var body: some View {
-            Text(viewModel.workout.soundControlType.rawValue.capitalized)
-        }
-        
+    @ViewBuilder
+    private func displayControl() -> some View {
+        Text(workoutModel.workout.soundControlType.rawValue.capitalized)
+            .onTapGesture {
+                withAnimation {
+                    self.isEditing = true
+                }
+            }
     }
     
 }

@@ -9,40 +9,34 @@ import SwiftUI
 
 struct PlayControl:View {
     
-    @EnvironmentObject private var viewModel:WorkoutViewModel
+    private struct Constants {
+        static let pauseImage = "pause.fill"
+        static let playImage = "play.fill"
+    }
+    
+    @EnvironmentObject private var workoutModel:WorkoutViewModel
     
     var body: some View {
         
-        if viewModel.workout.isPlaying {
-            Button {
-                // Pause the workout
-                viewModel.pauseSession()
-            } label: {
-                ScalableSystemImageView(systemImageText: "pause.fill")
-                    
-            }
-
+        if workoutModel.workout.isPlaying {
+            systemImageControl(Constants.pauseImage) { workoutModel.pauseSession() }
         } else {
-            Button {
-                // Play the workout
-                viewModel.playSession()
-            } label: {
-                ScalableSystemImageView(systemImageText: "play.fill")
-            }
+            systemImageControl(Constants.playImage) { workoutModel.playSession() }
         }
         
     }
     
-    struct ScalableSystemImageView:View {
+    @ViewBuilder
+    private func systemImageControl(_ imageName:String, onTap tapAction: @escaping () -> Void ) -> some View {
         
-        let systemImageText:String
-        
-        var body: some View {
-            Image(systemName: systemImageText)
+        Button {
+            // Play the workout
+            tapAction()
+        } label: {
+            Image(systemName: imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
         }
-        
     }
     
 }

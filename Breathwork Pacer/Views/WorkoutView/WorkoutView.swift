@@ -11,9 +11,9 @@ struct WorkoutView: View {
     
     // Fetch request of settings
     
-    @EnvironmentObject var viewModel:WorkoutViewModel
+    @EnvironmentObject var workoutModel:WorkoutViewModel
     
-    var breathSet:BreathSet { viewModel.workout.breathSet }
+    var breathSet:BreathSet { workoutModel.workout.breathSet }
     
     var body: some View {
         
@@ -21,23 +21,12 @@ struct WorkoutView: View {
             // VStack
             VStack (alignment: .center, spacing: 0) {
                 
-                /// For Testing
-                /// Display the breath steps and their durations
-//                VStack (alignment: .leading) {
-//                    ForEach(self.viewModel.workout.steps) { step in
-//                        let highlight:Color = self.viewModel.workout.currentStep.id == step.id ? .blue : .black
-//
-//                        Text("\(step.type.capitalized), \(step.duration)")
-//                            .foregroundColor(highlight)
-//                    }
-//                }
-                
                 // Timer
-                TimerView(minutes: viewModel.getCountdownMinutes(), seconds: viewModel.getCountdownSeconds())
+                TimerView(minutes: workoutModel.getCountdownMinutes(), seconds: workoutModel.getCountdownSeconds())
                     .padding(.vertical)
-                Text(viewModel.getStepActionText())
+                Text(workoutModel.getStepActionText())
                 // Animation - TabView as page with different animations that can be swiped
-                BreathAnimationTabView(selectedAnimation: viewModel.workout.animationType)
+                BreathAnimationPageView(selectedAnimation: workoutModel.workout.animationType)
                     .frame(width: geo.size.width * 0.5, height: geo.size.height * 0.5)
                     .padding(.bottom)
                 // Play/Pause Controls
@@ -57,10 +46,16 @@ struct WorkoutView: View {
             
         }
         .onDisappear {
-            viewModel.pauseSession()
+            workoutModel.pauseSession()
         }
         
     }
+    
+    @ViewBuilder
+    private func timerView() -> some View {
+        
+    }
+    
 }
 
 struct WorkoutView_Previews: PreviewProvider {

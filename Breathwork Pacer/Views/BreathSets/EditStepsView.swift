@@ -10,8 +10,6 @@ import SwiftUI
 struct EditStepsView: View {
     // will fetch steps from a view model
     
-    private typealias ConstantsEditStepsView = EditStepsView.Constants
-    
     private struct Constants {
         
         static let leadingEdgeInset:CGFloat = 20
@@ -40,7 +38,7 @@ struct EditStepsView: View {
     
     var body: some View {
         
-        let container = VStack(alignment: .center, spacing: ConstantsEditStepsView.noSpacing) {
+        let container = VStack(alignment: .center, spacing: Constants.noSpacing) {
             
             let title = Text(breathSet.title)
             
@@ -60,7 +58,7 @@ struct EditStepsView: View {
         
         container
             .listStyle(.plain)
-            .padding(ConstantsEditStepsView.noPadding)
+            .padding(Constants.noPadding)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
@@ -88,7 +86,7 @@ struct EditStepsView: View {
         view
             .tag(step.id)
             .listRowInsets(listRowInsets())
-            .animation(.easeOut(duration: ConstantsEditStepsView.animationDuration), value: editMode)
+            .animation(.easeOut(duration: Constants.animationDuration), value: editMode)
         //            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
         //
         //                Button {
@@ -110,10 +108,10 @@ struct EditStepsView: View {
     }
     
     private func listRowInsets() -> EdgeInsets {
-        EdgeInsets.init(top: ConstantsEditStepsView.bottomEdgeInset,
-                        leading: ConstantsEditStepsView.leadingEdgeInset,
-                        bottom: ConstantsEditStepsView.bottomEdgeInset,
-                        trailing: ConstantsEditStepsView.trailingEdgeInset)
+        EdgeInsets.init(top: Constants.bottomEdgeInset,
+                        leading: Constants.leadingEdgeInset,
+                        bottom: Constants.bottomEdgeInset,
+                        trailing: Constants.trailingEdgeInset)
     }
 }
 

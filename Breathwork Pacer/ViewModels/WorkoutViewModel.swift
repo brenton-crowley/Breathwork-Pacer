@@ -22,7 +22,7 @@ class WorkoutViewModel: ObservableObject {
     
     init(breathSet:BreathSet) {
         
-        let isFirstRun = UserDefaults.standard.bool(forKey: Constants.dataIsPreloadedKey)
+        let isFirstRun = UserDefaults.standard.bool(forKey: GlobalConstants.dataIsPreloadedKey)
         
         // create workout based on UserDefaults
         if isFirstRun {
@@ -155,7 +155,7 @@ class WorkoutViewModel: ObservableObject {
         if self.workout.totalElapsedTime == 0.0 { playNewSound() } else { resumeSound() }
         
         
-        self.timer = Timer(timeInterval: Constants.timerDelay, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
+        self.timer = Timer(timeInterval: GlobalConstants.timerDelay, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
         RunLoop.current.add(timer, forMode: .common)
         
         self.workout.setIsPlaying(true)
@@ -165,7 +165,7 @@ class WorkoutViewModel: ObservableObject {
         // if elapsed time == total time, stop time and finish session
         // this is handled inside the workout model.
         let lastStep = self.workout.currentStep
-        self.workout.incrementElapsedTime(amount: Constants.timerDelay)
+        self.workout.incrementElapsedTime(amount: GlobalConstants.timerDelay)
         
         // If the last step is different to the current step
         // start new sound.

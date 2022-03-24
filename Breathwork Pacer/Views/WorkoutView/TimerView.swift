@@ -9,7 +9,15 @@ import SwiftUI
 
 struct TimerView:View {
     
-    @EnvironmentObject private var viewModel:WorkoutViewModel
+    private struct Constants {
+        static let editingSize:CGSize = CGSize(width: 300, height: 200)
+        static let cornerRadius:CGFloat = 20
+        static let pickerWidth:CGFloat = 70
+        static let timeRange:ClosedRange<Int> = 0...60
+        
+    }
+    
+    @EnvironmentObject private var workoutModel:WorkoutViewModel
     
     @State var isEditing:Bool = false
     @State var minutes:Int
@@ -18,159 +26,97 @@ struct TimerView:View {
     var body: some View {
         
         VStack {
-                
-            if isEditing {
-               
-                EditTimerView(isEditing: $isEditing,
-                              minutes: $minutes,
-                              seconds: $seconds)
-                
-            } else {
-                
-                TimerDisplayView(isEditing: $isEditing,
-                                 minutes: $minutes,
-                                 seconds: $seconds)
-            }
+            if isEditing { editTimerView() } else { timerDisiplayView() }
         }
     }
     
-    struct TimerDisplayView: View {
+    // MARK: - Timer Display View
+    @ViewBuilder
+    private func timerDisiplayView() -> some View {
         
-        @EnvironmentObject private var viewModel:WorkoutViewModel
-        @Binding var isEditing:Bool
-        @Binding var minutes:Int
-        @Binding var seconds:Int
-        
-        var body: some View {
-            Text(String(format: "%02d:%02d", viewModel.getCountdownMinutes(), viewModel.getCountdownSeconds()))
-                .font(.largeTitle)
-                .onTapGesture {
-                    if !viewModel.workout.isPlaying {
-                        withAnimation {
-                            isEditing = true
-                            self.minutes = viewModel.getCountdownMinutes()
-                            self.seconds = viewModel.getCountdownSeconds()
-                        }
+        Text(String(format: "%02d:%02d", workoutModel.getCountdownMinutes(), workoutModel.getCountdownSeconds()))
+            .font(.largeTitle)
+            .onTapGesture {
+                if !workoutModel.workout.isPlaying {
+                    withAnimation {
+                        isEditing = true
+                        self.minutes = workoutModel.getCountdownMinutes()
+                        self.seconds = workoutModel.getCountdownSeconds()
                     }
                 }
-                .transition(.scale)
-        }
+            }
+            .transition(.scale)
     }
     
-    struct EditTimerView:View {
+    // MARK: - Edit Timer View
+    @ViewBuilder
+    private func editTimerView() -> some View {
         
-        @EnvironmentObject private var viewModel:WorkoutViewModel
-        @Binding var isEditing:Bool
-        @Binding var minutes:Int
-        @Binding var seconds:Int
-        
-        var body: some View {
-            HStack (alignment: .center, spacing: 0) {
-                
-                // TODO: - On reset or bookmark, reset the current step index to 0
-                TimePicker(label: "Minutes", range: 0...60, value: $minutes)
-                Text(" minutes : ")
-                    .font(.caption)
-                
-                TimePicker(label: "Seconds", range: 0...60, value: $seconds)
-                Text(" seconds")
-                    .font(.caption)
-                // Done Editing
-                
-                VStack {
-                    // MARK: - Reset the Timer to the saved duration.
-//                    TimerPickerButton(systemImageName: "gobackward",
-//                                      newMinutes: viewModel.getDefaultMinutes(),
-//                                      newSeconds: viewModel.getDefaultSeconds(),
-//                                      isEditing: $isEditing) {
-//
-//                        self.minutes = viewModel.getDefaultMinutes()
-//                        self.seconds = viewModel.getDefaultSeconds()
-//                    }
-//                    Spacer()
-                    // MARK: - Save new Timer default duration
-//                    TimerPickerButton(systemImageName: "bookmark.circle",
-//                                      newMinutes: minutes,
-//                                      newSeconds: seconds,
-//                                      isEditing: $isEditing) {
-////                        viewModel.setNewTotalDurationFromMinutes(minutes, seconds: seconds)
-//                        viewModel.saveDefaultTimerDuration(minutes, seconds)
-//                    }
-//                    Spacer()
-                    // MARK: - Accept the current Time duration
-                    TimerPickerButton(systemImageName: "checkmark.circle",
-                                      newMinutes: minutes,
-                                      newSeconds: seconds,
-                                      isEditing: $isEditing)
-                    
-                }
-                
+        let container = HStack (alignment: .center, spacing: 0) {
             
+            let minutesPicker = timePicker(labelText: "Minutes", range: Constants.timeRange, value: $minutes)
+            let secondsPicker = timePicker(labelText: "Seconds", range: Constants.timeRange, value: $seconds)
+            let doneButton = timePickerButton(systemImageName: "checkmark.circle") {
+                withAnimation {
+                    isEditing = false
+                }
+                workoutModel.setNewTotalDurationFromMinutes(minutes, seconds: seconds)
             }
-            .frame(width: 300, height: 200)
+            
+            // View Builder Stack
+            minutesPicker
+            Text(" minutes : ")
+                .font(.caption)
+            
+            secondsPicker
+            Text(" seconds")
+                .font(.caption)
+            doneButton
+            
+        }
+        
+        container
+            .frame(width: Constants.editingSize.width, height: Constants.editingSize.height)
             .overlay {
-                RoundedRectangle(cornerRadius: 20, style: .continuous)
+                RoundedRectangle(cornerRadius: Constants.cornerRadius, style: .continuous)
                     .stroke()
             }
             .transition(.scale)
-        }
         
     }
     
-    struct TimePicker:View {
-        
-        let label:String
-        let range:ClosedRange<Int>
-        @Binding var value:Int
-        
-        var body: some View {
-            Picker(label, selection: $value) {
-                ForEach(range, id: \.self) {
-                    Text(String($0))
-                }
+    // MARK: - Time Picker
+    @ViewBuilder
+    private func timePicker(labelText:String, range:ClosedRange<Int>, value:Binding<Int>) -> some View {
+        Picker(labelText, selection: value) {
+            ForEach(range, id: \.self) {
+                Text(String($0))
             }
-            .pickerStyle(.wheel)
-            .labelsHidden()
-            .frame(width: 70)
         }
-        
+        .pickerStyle(.wheel)
+        .labelsHidden()
+        .frame(width: Constants.pickerWidth)
     }
-
-    struct TimerPickerButton:View {
+    
+    // MARK: - Time Picker Button
+    @ViewBuilder
+    private func timePickerButton(systemImageName:String, action: (() -> Void)? = nil) -> some View {
         
-        @EnvironmentObject private var viewModel:WorkoutViewModel
-        
-        let systemImageName:String
-        let newMinutes:Int
-        let newSeconds:Int
-        @Binding var isEditing:Bool
-        var action:(() -> Void)?
-        
-        var body: some View {
+        Button {
             
-            Button {
-                
-                if let action = action {
-                    action()
-                } else {
-                    withAnimation {
-                        isEditing = false
-                    }
-                    viewModel.setNewTotalDurationFromMinutes(newMinutes, seconds: newSeconds)
-                }
-                
-            } label: {
-                Image(systemName: systemImageName)
-                    .resizable()
-                    .scaledToFit()
+            if let action = action {
+                action()
             }
-            .padding()
+            
+        } label: {
+            Image(systemName: systemImageName)
+                .resizable()
+                .scaledToFit()
+        }
+        .padding()
 //            .buttonStyle(.plain)
-            
-        }
         
     }
-    
 }
 
 /// This code was found online and is needed to fix a bug of the hit area of resized pickers.

@@ -1,5 +1,5 @@
 //
-//  Constants.swift
+//  GlobalConstants.swift
 //  Breathwork Pacer
 //
 //  Created by Brent on 15/3/2022.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Constants {
+struct GlobalConstants {
     
     // MARK: - UserDefaults
     static let dataIsPreloadedKey = "dataIsPreloaded"

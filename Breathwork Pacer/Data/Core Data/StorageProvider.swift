@@ -271,7 +271,7 @@ extension StorageProvider {
         // Must specify the type with annotation, otherwise Xcode won't know what overload of fetchRequest() to use (we want to use the one for the Movie entity)
         // The generic argument <Movie> allows Swift to know what kind of managed object a fetch request returns, which will make it easier to return the list of movies as an array
         let fetchRequest: NSFetchRequest<BreathSet> = BreathSet.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: Constants.sortOrderKey, ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: GlobalConstants.sortOrderKey, ascending: true)]
         
         do {
             

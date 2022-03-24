@@ -48,15 +48,15 @@ class BreathSetsModel: ObservableObject {
             batchDeleteEntityName("BreathSet")
             batchDeleteEntityName("BreathStep")
             
-            UserDefaults.standard.setValue(false, forKey: Constants.dataIsPreloadedKey)
+            UserDefaults.standard.setValue(false, forKey: GlobalConstants.dataIsPreloadedKey)
         }
         
         
-        let status = UserDefaults.standard.bool(forKey: Constants.dataIsPreloadedKey)
+        let status = UserDefaults.standard.bool(forKey: GlobalConstants.dataIsPreloadedKey)
        
         if !status {
             self.storageProvider.loadAndParseJSONOnSuccess {
-                UserDefaults.standard.setValue(true, forKey: Constants.dataIsPreloadedKey)
+                UserDefaults.standard.setValue(true, forKey: GlobalConstants.dataIsPreloadedKey)
                 print("Successfully preloaded and saved data into core data store upon first run.")
                 self.fetchBreathSets()
                 print(self.breathSets!)
@@ -97,8 +97,9 @@ class BreathSetsModel: ObservableObject {
     }
     
     func delete(fromOffsets: IndexSet) {
-        
-        
+        // remove the item from the breath steps
+        // reset all the sort order value -> map function?
+        // save the data store
     }
     
     func addStepInSteps(_ steps:[BreathStep], forBreathSet breathSet:BreathSet) {

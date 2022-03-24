@@ -18,7 +18,7 @@
 		8418D97427E18C8D004C43B8 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418D97327E18C8D004C43B8 /* Workout.swift */; };
 		8431D62E27E29B4400D98711 /* SoundControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431D62D27E29B4400D98711 /* SoundControl.swift */; };
 		8431D63027E29B5F00D98711 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431D62F27E29B5F00D98711 /* Enums.swift */; };
-		8431D63427E29BC400D98711 /* BreathAnimationTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431D63327E29BC400D98711 /* BreathAnimationTabView.swift */; };
+		8431D63427E29BC400D98711 /* BreathAnimationPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431D63327E29BC400D98711 /* BreathAnimationPageView.swift */; };
 		8431D63627E29CF700D98711 /* PlayControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431D63527E29CF700D98711 /* PlayControl.swift */; };
 		8431D63827E2D9E200D98711 /* Animatables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431D63727E2D9E200D98711 /* Animatables.swift */; };
 		8457F0EB27DFF8740059D627 /* default_workouts.json in Resources */ = {isa = PBXBuildFile; fileRef = 8457F0EA27DFF8740059D627 /* default_workouts.json */; };
@@ -27,7 +27,7 @@
 		846B98F627DFFC13009367F6 /* JSONModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B98F527DFFC13009367F6 /* JSONModels.swift */; };
 		846B98FD27E00133009367F6 /* BreathStep+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B98F927E00133009367F6 /* BreathStep+CoreDataClass.swift */; };
 		846B98FE27E00133009367F6 /* BreathStep+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B98FA27E00133009367F6 /* BreathStep+CoreDataProperties.swift */; };
-		846B990127E004F3009367F6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B990027E004F3009367F6 /* Constants.swift */; };
+		846B990127E004F3009367F6 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B990027E004F3009367F6 /* GlobalConstants.swift */; };
 		846B990427E00E1A009367F6 /* BreathSet+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B990227E00E1A009367F6 /* BreathSet+CoreDataClass.swift */; };
 		846B990527E00E1A009367F6 /* BreathSet+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B990327E00E1A009367F6 /* BreathSet+CoreDataProperties.swift */; };
 		846B990727E02AAE009367F6 /* EditStepsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B990627E02AAE009367F6 /* EditStepsView.swift */; };
@@ -58,7 +58,7 @@
 		8418D97327E18C8D004C43B8 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		8431D62D27E29B4400D98711 /* SoundControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundControl.swift; sourceTree = "<group>"; };
 		8431D62F27E29B5F00D98711 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
-		8431D63327E29BC400D98711 /* BreathAnimationTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathAnimationTabView.swift; sourceTree = "<group>"; };
+		8431D63327E29BC400D98711 /* BreathAnimationPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathAnimationPageView.swift; sourceTree = "<group>"; };
 		8431D63527E29CF700D98711 /* PlayControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayControl.swift; sourceTree = "<group>"; };
 		8431D63727E2D9E200D98711 /* Animatables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animatables.swift; sourceTree = "<group>"; };
 		8457F0EA27DFF8740059D627 /* default_workouts.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = default_workouts.json; sourceTree = "<group>"; };
@@ -68,7 +68,7 @@
 		846B98F527DFFC13009367F6 /* JSONModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONModels.swift; sourceTree = "<group>"; };
 		846B98F927E00133009367F6 /* BreathStep+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BreathStep+CoreDataClass.swift"; sourceTree = "<group>"; };
 		846B98FA27E00133009367F6 /* BreathStep+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BreathStep+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		846B990027E004F3009367F6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		846B990027E004F3009367F6 /* GlobalConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		846B990227E00E1A009367F6 /* BreathSet+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BreathSet+CoreDataClass.swift"; sourceTree = "<group>"; };
 		846B990327E00E1A009367F6 /* BreathSet+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BreathSet+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		846B990627E02AAE009367F6 /* EditStepsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStepsView.swift; sourceTree = "<group>"; };
@@ -195,7 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				8410EF7127E14F550046FC12 /* WorkoutView.swift */,
-				8431D63327E29BC400D98711 /* BreathAnimationTabView.swift */,
+				8431D63327E29BC400D98711 /* BreathAnimationPageView.swift */,
 				8418D96F27E168A1004C43B8 /* TimerView.swift */,
 				8431D62D27E29B4400D98711 /* SoundControl.swift */,
 				8431D63527E29CF700D98711 /* PlayControl.swift */,
@@ -223,7 +223,7 @@
 		846B98FF27E004E8009367F6 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				846B990027E004F3009367F6 /* Constants.swift */,
+				846B990027E004F3009367F6 /* GlobalConstants.swift */,
 				8431D62F27E29B5F00D98711 /* Enums.swift */,
 				8431D63727E2D9E200D98711 /* Animatables.swift */,
 				84EC1EF727E3FD5800C4AE63 /* SoundProvider.swift */,
@@ -349,10 +349,10 @@
 				8410EF7227E14F550046FC12 /* WorkoutView.swift in Sources */,
 				84EC1EF827E3FD5800C4AE63 /* SoundProvider.swift in Sources */,
 				846B98FE27E00133009367F6 /* BreathStep+CoreDataProperties.swift in Sources */,
-				8431D63427E29BC400D98711 /* BreathAnimationTabView.swift in Sources */,
+				8431D63427E29BC400D98711 /* BreathAnimationPageView.swift in Sources */,
 				846B990527E00E1A009367F6 /* BreathSet+CoreDataProperties.swift in Sources */,
 				84D197F727E059430083983D /* BreathSet+PreviewProvider.swift in Sources */,
-				846B990127E004F3009367F6 /* Constants.swift in Sources */,
+				846B990127E004F3009367F6 /* GlobalConstants.swift in Sources */,
 				8418D97227E18C75004C43B8 /* WorkoutViewModel.swift in Sources */,
 				84EC1F2A27E4419D00C4AE63 /* Settings.swift in Sources */,
 				846B98F627DFFC13009367F6 /* JSONModels.swift in Sources */,

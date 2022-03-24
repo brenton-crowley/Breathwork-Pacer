@@ -9,11 +9,9 @@ import SwiftUI
 
 struct BreathStepView: View {
     
-    private typealias ConstantsBreathStepView = BreathStepView.Constants
-    
     private struct Constants {
         
-        // Chell
+        // Cell
         static let cellHeight:CGFloat = 120
         
         // Opacity
@@ -56,12 +54,12 @@ struct BreathStepView: View {
             ZStack {
                 // Build both views but only display
                 editingView
-                    .opacity(isFocused ? ConstantsBreathStepView.opaque : ConstantsBreathStepView.transparent)
-                    .offset(y: isFocused ? ConstantsBreathStepView.activeValue : -Constants.offsetValue)
+                    .opacity(isFocused ? Constants.opaque : Constants.transparent)
+                    .offset(y: isFocused ? Constants.activeValue : -Constants.offsetValue)
                 
                 displayView
-                    .opacity(isFocused ? ConstantsBreathStepView.transparent : ConstantsBreathStepView.opaque)
-                    .offset(y: isFocused ? ConstantsBreathStepView.offsetValue : ConstantsBreathStepView.activeValue)
+                    .opacity(isFocused ? Constants.transparent : Constants.opaque)
+                    .offset(y: isFocused ? Constants.offsetValue : Constants.activeValue)
                     .foregroundColor(BreathSetsModel.colorScheme == .light ? .white : .black)
             }
             .padding(.horizontal)
@@ -69,7 +67,7 @@ struct BreathStepView: View {
         }
         
         container
-            .frame(height: ConstantsBreathStepView.cellHeight)
+            .frame(height: Constants.cellHeight)
         
     }
     
@@ -86,12 +84,14 @@ struct BreathStepView: View {
         
     }
     
+    // MARK: - Display View
     @ViewBuilder
     private func displayView(stepTypeText:String) -> some View {
         
         HStack {
+            
             Text(stepTypeText)
-                .font(.system(.title, design: .rounded))
+                .font(.system(.title2, design: .rounded))
                 .fontWeight(.heavy)
                 .padding(.horizontal)
             Spacer()
@@ -99,9 +99,11 @@ struct BreathStepView: View {
                 .padding(.horizontal)
                 .font(.system(.title3, design: .rounded))
         }
+        .animation(.default, value: parentIsEditing)
         
     }
     
+    // MARK: - Editing View
     @ViewBuilder
     private func editingView() -> some View {
         
@@ -156,14 +158,13 @@ struct BreathStepView: View {
                     }
                     .buttonStyle(.plain)
                 } else {
-                    Stepper("", value: $duration, step: ConstantsBreathStepView.stepperChangeAmount)
+                    Stepper("", value: $duration, step: Constants.stepperChangeAmount)
                 }
             }
             
             stepTypeControl
             durationControl
                 .onChange(of: duration) { newValue in
-                    // TODO: call the view model to change the duration value of the breath step
                     home.updateBreathStepDurationTo(duration, forID: breathStepId)
                 }
         }
@@ -196,7 +197,7 @@ struct BreathStepView_Previews: PreviewProvider {
         let breathSet = BreathSet.example
         let step:BreathStep = breathSet.steps?.allObjects.first! as! BreathStep
         let stepType = BreathStepType.stepTypeForString(step.type)
-        BreathStepView(stepType: stepType, duration: step.duration, breathStepId: step.id, parentIsEditing: true)
+        BreathStepView(stepType: stepType, duration: step.duration, breathStepId: step.id, parentIsEditing: false)
         .environmentObject(BreathSetsModel(storageProvider: StorageProvider.preview))
 //            .preferredColorScheme(.dark)
     }

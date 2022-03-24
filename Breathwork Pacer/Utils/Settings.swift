@@ -27,10 +27,10 @@ class Settings {
             defaults.register(defaults: values)
         }
         
-        self.defaultTimer = defaults.integer(forKey: Constants.defaultTimerDurationKey)
-        self.defaultColor = defaults.string(forKey: Constants.defaultColorKey) ?? "blue"
-        self.defaultAnimation = defaults.string(forKey: Constants.defaultAnimationKey) ?? BreathAnimationType.circleAnimation.rawValue
-        self.defaultSound = defaults.string(forKey: Constants.defaultSoundKey) ?? SoundControlType.none.rawValue
+        self.defaultTimer = defaults.integer(forKey: GlobalConstants.defaultTimerDurationKey)
+        self.defaultColor = defaults.string(forKey: GlobalConstants.defaultColorKey) ?? "blue"
+        self.defaultAnimation = defaults.string(forKey: GlobalConstants.defaultAnimationKey) ?? BreathAnimationType.circleAnimation.rawValue
+        self.defaultSound = defaults.string(forKey: GlobalConstants.defaultSoundKey) ?? SoundControlType.none.rawValue
     }
         
     static private func readPropertyList() -> [String: Any]? {
@@ -43,22 +43,22 @@ class Settings {
     }
     
     func saveDefaultTimerTo(_ value:Int) {
-        UserDefaults.standard.setValue(value, forKey: Constants.defaultTimerDurationKey)
+        UserDefaults.standard.setValue(value, forKey: GlobalConstants.defaultTimerDurationKey)
         self.defaultTimer = value
     }
     
     func saveDefaultColorTo(_ value:String) {
-        UserDefaults.standard.setValue(value, forKey: Constants.defaultColorKey)
+        UserDefaults.standard.setValue(value, forKey: GlobalConstants.defaultColorKey)
         self.defaultColor = value
     }
     
     func saveDefaultAnimationTo(_ value:String) {
-        UserDefaults.standard.setValue(value, forKey: Constants.defaultAnimationKey)
+        UserDefaults.standard.setValue(value, forKey: GlobalConstants.defaultAnimationKey)
         self.defaultAnimation = value
     }
     
     func saveDefaultSoundTo(_ value:String) {
-        UserDefaults.standard.setValue(value, forKey: Constants.defaultSoundKey)
+        UserDefaults.standard.setValue(value, forKey: GlobalConstants.defaultSoundKey)
         self.defaultSound = value
     }
     
