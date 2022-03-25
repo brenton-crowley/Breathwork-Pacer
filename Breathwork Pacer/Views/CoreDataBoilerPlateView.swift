@@ -54,7 +54,7 @@ struct CoreDataBoilerPlateView: View {
                         // use breathstepcell
                         
                         let stepType = BreathStepType.stepTypeForString(step.type)
-                        BreathStepView(stepType: stepType, duration: step.duration, breathStepId: step.id, parentIsEditing: (editMode == .active))
+                        BreathStepView(stepType: stepType, duration: step.duration, breathStepId: step.id, parentIsEditing: (editMode == .active), sortOrder: step.sortOrder)
                             .tag(step.id)
                             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                                 

@@ -12,10 +12,10 @@ struct EditStepsView: View {
     
     private struct Constants {
         
-        static let leadingEdgeInset:CGFloat = 20
-        static let topEdgeInset:CGFloat = 20
-        static let trailingEdgeInset:CGFloat = 20
-        static let bottomEdgeInset:CGFloat = 0
+        static let leadingEdgeInset:CGFloat = 0
+        static let topEdgeInset:CGFloat = 0
+        static let trailingEdgeInset:CGFloat = 0
+        static let bottomEdgeInset:CGFloat = 1
         static let animationDuration:CGFloat = 0.2
         
         // Padding and Spacing Constants
@@ -43,11 +43,11 @@ struct EditStepsView: View {
             let title = Text(breathSet.title)
             
             let list = List {
-                ForEach(steps) { step in
-                    listItemWithStep(step)
-                }
-                .onMove(perform: self.model.move)
-                .onDelete(perform: self.model.delete)
+                ForEach(steps) { listItemWithStep($0) }
+                .onMove(perform: self.moveStep)
+                .onDelete(perform: self.delete)
+                .listRowInsets(listRowInsets())
+                .listRowSeparator(.hidden)
             }
             
             title
@@ -57,7 +57,7 @@ struct EditStepsView: View {
         }
         
         container
-            .listStyle(.plain)
+//            .listStyle(.plain)
             .padding(Constants.noPadding)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -71,7 +71,17 @@ struct EditStepsView: View {
                         Image(systemName: "plus")
                     }
                 }
-            }.environment(\.editMode, $editMode)
+            }
+            .environment(\.editMode, $editMode)
+            .animation(.default, value: steps)
+    }
+    
+    private func delete(at offsets:IndexSet) {
+        model.delete(fromOffsets: offsets, steps: steps)
+    }
+    
+    private func moveStep(at offsets:IndexSet, destination:Int) {
+        model.move(from: offsets, destination: destination, steps: steps)
     }
     
     @ViewBuilder
@@ -81,11 +91,11 @@ struct EditStepsView: View {
         let view = BreathStepView(stepType: stepType,
                                   duration: Double(step.duration),
                                   breathStepId: step.id,
-                                  parentIsEditing: (editMode == .active))
+                                  parentIsEditing: (editMode == .active),
+                                  sortOrder: step.sortOrder)
         
         view
             .tag(step.id)
-            .listRowInsets(listRowInsets())
             .animation(.easeOut(duration: Constants.animationDuration), value: editMode)
         //            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
         //

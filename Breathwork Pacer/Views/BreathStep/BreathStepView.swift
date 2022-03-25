@@ -35,6 +35,7 @@ struct BreathStepView: View {
         
     let breathStepId:UUID
     let parentIsEditing:Bool
+    let sortOrder:Int
 
     var body: some View {
         
@@ -42,7 +43,8 @@ struct BreathStepView: View {
             
             let background = Rectangle()
             let editingView = editingView()
-            let displayView = displayView(stepTypeText: stepType.rawValue.capitalized)
+            let displayText = "\(stepType.rawValue.capitalized), \(sortOrder)"
+            let displayView = displayView(stepTypeText: displayText)
             
             background
                 .foregroundColor(colorForStepType())
@@ -71,11 +73,12 @@ struct BreathStepView: View {
         
     }
     
+    // MARK: - Background Colour
     private func colorForStepType() -> Color {
         
         switch stepType {
         case .inhale:
-            return Color.pink
+            return Color.purple
         case .exhale:
             return Color.cyan
         case .rest:
@@ -197,7 +200,7 @@ struct BreathStepView_Previews: PreviewProvider {
         let breathSet = BreathSet.example
         let step:BreathStep = breathSet.steps?.allObjects.first! as! BreathStep
         let stepType = BreathStepType.stepTypeForString(step.type)
-        BreathStepView(stepType: stepType, duration: step.duration, breathStepId: step.id, parentIsEditing: false)
+        BreathStepView(stepType: stepType, duration: step.duration, breathStepId: step.id, parentIsEditing: false, sortOrder: 22)
         .environmentObject(BreathSetsModel(storageProvider: StorageProvider.preview))
 //            .preferredColorScheme(.dark)
     }

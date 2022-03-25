@@ -89,21 +89,59 @@ class BreathSetsModel: ObservableObject {
         }
     }
     
-    func move(fromOffsets: IndexSet, toOffset: Int) {
-        // locate the current index of the item to move
+    func move(from offsets: IndexSet, destination: Int, steps:[BreathStep]) {
         
-        print("fromOffsets: \(fromOffsets.description). toOffset: \(toOffset)")
+        let startIndex = offsets.first!
+        var targetIndex = startIndex
         
+        // moving from smaller to larger, set the targetIndex
+        if startIndex < destination - 1 { targetIndex = destination - 1 }
+        // moving from large to small, set the target Index
+        else if startIndex >  destination { targetIndex = destination }
+        
+        // if the target index is the same as the start index, early exit.
+        guard startIndex != targetIndex else { return }
+        
+        // otherwise, rearrange the steps and reset the sortOrder property
+        let rearrangedSteps:[BreathStep] = rearrange(array: steps, fromIndex: startIndex, toIndex: targetIndex)
+        rearrangedSteps.indices.forEach { rearrangedSteps[$0].sortOrder = $0 }
+        
+        storageProvider.updateBreathSet()
     }
     
-    func delete(fromOffsets: IndexSet) {
-        // remove the item from the breath steps
-        // reset all the sort order value -> map function?
-        // save the data store
+    // candidate for an array extension
+    private func rearrange<T>(array: Array<T>, fromIndex: Int, toIndex:Int) -> Array<T> {
+        
+        var a = array
+        let element = a.remove(at: fromIndex) // remove and store the element
+        a.insert(element, at: toIndex) // reinsert the element
+        return a
+    }
+    
+    
+    func delete(fromOffsets offsets: IndexSet, steps:[BreathStep]) {
+        
+        guard steps.count > 0 else { return }
+        
+        var breathSet:BreathSet?
+        
+        // delete the step
+        offsets.map {steps[$0]}.forEach { step in
+            breathSet = step.breathSet
+            storageProvider.deleteStep(step)
+        }
+        
+        if let breathSet = breathSet {
+            var s = breathSet.steps?.allObjects as! [BreathStep]
+            s.sort { $0.sortOrder < $1.sortOrder }
+            s.indices.forEach { s[$0].sortOrder = $0 }
+
+            storageProvider.updateBreathSet()
+        }
     }
     
     func addStepInSteps(_ steps:[BreathStep], forBreathSet breathSet:BreathSet) {
-        let index = (steps.last?.sortOrder ?? -1 ) + 1
+        let index = steps.count
         let step = generateBreathStepAtIndex(index)
         step.breathSet = breathSet
         
