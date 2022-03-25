@@ -57,7 +57,7 @@ struct EditStepsView: View {
         }
         
         container
-//            .listStyle(.plain)
+            .listStyle(.plain)
             .padding(Constants.noPadding)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

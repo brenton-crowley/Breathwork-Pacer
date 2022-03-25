@@ -48,6 +48,7 @@ struct BreathStepView: View {
             
             background
                 .foregroundColor(colorForStepType())
+                .padding(.horizontal)
                 .onTapGesture {
                     isFocused.toggle()
                 }
