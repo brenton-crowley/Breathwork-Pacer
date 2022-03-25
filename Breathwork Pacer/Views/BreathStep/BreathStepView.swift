@@ -7,6 +7,14 @@
 
 import SwiftUI
 
+extension Color {
+    static let ui = Color.UI()
+    static let labelColor = Color("labelColour")
+    struct UI {
+        let labelColor = Color(GlobalConstants.breathStepLabelColour)
+    }
+}
+
 struct BreathStepView: View {
     
     private struct Constants {
@@ -43,7 +51,7 @@ struct BreathStepView: View {
             
             let background = Rectangle()
             let editingView = editingView()
-            let displayText = "\(stepType.rawValue.capitalized), \(sortOrder)"
+            let displayText = "\(stepType.rawValue.capitalized)"
             let displayView = displayView(stepTypeText: displayText)
             
             background
@@ -59,6 +67,7 @@ struct BreathStepView: View {
                 editingView
                     .opacity(isFocused ? Constants.opaque : Constants.transparent)
                     .offset(y: isFocused ? Constants.activeValue : -Constants.offsetValue)
+                    .padding(.horizontal)
                 
                 displayView
                     .opacity(isFocused ? Constants.transparent : Constants.opaque)
@@ -96,12 +105,14 @@ struct BreathStepView: View {
             
             Text(stepTypeText)
                 .font(.system(.title2, design: .rounded))
-                .fontWeight(.heavy)
+                .fontWeight(.bold)
                 .padding(.horizontal)
+                .foregroundColor(Color.labelColor)
             Spacer()
             Text("\(durationString()) \nseconds")
                 .padding(.horizontal)
                 .font(.system(.title3, design: .rounded))
+                .foregroundColor(Color.labelColor)
         }
         .animation(.default, value: parentIsEditing)
         
@@ -130,7 +141,7 @@ struct BreathStepView: View {
 
                 stepLabel
                     .font(.title3)
-                    .foregroundColor(BreathSetsModel.colorScheme == .light ? .white : .black)
+                    .foregroundColor(Color.labelColor)
 
                 breathTypeSegment
                     .pickerStyle(.segmented)
@@ -148,7 +159,7 @@ struct BreathStepView: View {
                 
                 durationLabel
                     .font(.title3)
-                    .foregroundColor(BreathSetsModel.colorScheme == .light ? .white : .black)
+                    .foregroundColor(Color.labelColor)
                 Spacer()
                 durationTextfield
                     .textFieldStyle(.roundedBorder)
@@ -201,8 +212,8 @@ struct BreathStepView_Previews: PreviewProvider {
         let breathSet = BreathSet.example
         let step:BreathStep = breathSet.steps?.allObjects.first! as! BreathStep
         let stepType = BreathStepType.stepTypeForString(step.type)
-        BreathStepView(stepType: stepType, duration: step.duration, breathStepId: step.id, parentIsEditing: false, sortOrder: 22)
+        BreathStepView(stepType: stepType, duration: step.duration, breathStepId: step.id!, parentIsEditing: false, sortOrder: 22)
         .environmentObject(BreathSetsModel(storageProvider: StorageProvider.preview))
-//            .preferredColorScheme(.dark)
+            .preferredColorScheme(.dark)
     }
 }

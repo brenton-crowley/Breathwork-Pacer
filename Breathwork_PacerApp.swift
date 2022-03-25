@@ -9,7 +9,6 @@ import SwiftUI
 
 @main
 struct Breathwork_PacerApp: App {
-//    let persistenceController = PersistenceController.shared
     
     @StateObject private var storageProvider = StorageProvider()
     

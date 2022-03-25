@@ -34,6 +34,7 @@
 		848EFBC527D7218800F1D243 /* BreathStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848EFBC427D7218800F1D243 /* BreathStepView.swift */; };
 		84D197F527E052B60083983D /* StorageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D197F427E052B60083983D /* StorageProvider.swift */; };
 		84D197F727E059430083983D /* BreathSet+PreviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D197F627E059430083983D /* BreathSet+PreviewProvider.swift */; };
+		84DD8FFD27ED66B600F3DFD8 /* AddStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DD8FFC27ED66B600F3DFD8 /* AddStep.swift */; };
 		84EC1EF827E3FD5800C4AE63 /* SoundProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EC1EF727E3FD5800C4AE63 /* SoundProvider.swift */; };
 		84EC1F2127E41B2D00C4AE63 /* male-breath-out.wav in Resources */ = {isa = PBXBuildFile; fileRef = 84EC1F1B27E41B2D00C4AE63 /* male-breath-out.wav */; };
 		84EC1F2227E41B2D00C4AE63 /* yoga-exhale.wav in Resources */ = {isa = PBXBuildFile; fileRef = 84EC1F1C27E41B2D00C4AE63 /* yoga-exhale.wav */; };
@@ -75,6 +76,7 @@
 		848EFBC427D7218800F1D243 /* BreathStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathStepView.swift; sourceTree = "<group>"; };
 		84D197F427E052B60083983D /* StorageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageProvider.swift; sourceTree = "<group>"; };
 		84D197F627E059430083983D /* BreathSet+PreviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "BreathSet+PreviewProvider.swift"; path = "Breathwork Pacer/Data/Core Data/BreathSet+PreviewProvider.swift"; sourceTree = SOURCE_ROOT; };
+		84DD8FFC27ED66B600F3DFD8 /* AddStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStep.swift; sourceTree = "<group>"; };
 		84EC1EF727E3FD5800C4AE63 /* SoundProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundProvider.swift; sourceTree = "<group>"; };
 		84EC1F1B27E41B2D00C4AE63 /* male-breath-out.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "male-breath-out.wav"; path = "Breathwork Pacer/Sounds/male-breath-out.wav"; sourceTree = SOURCE_ROOT; };
 		84EC1F1C27E41B2D00C4AE63 /* yoga-exhale.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "yoga-exhale.wav"; path = "Breathwork Pacer/Sounds/yoga-exhale.wav"; sourceTree = SOURCE_ROOT; };
@@ -235,6 +237,7 @@
 		848EFBC327D7217B00F1D243 /* BreathStep */ = {
 			isa = PBXGroup;
 			children = (
+				84DD8FFC27ED66B600F3DFD8 /* AddStep.swift */,
 				848EFBC427D7218800F1D243 /* BreathStepView.swift */,
 			);
 			path = BreathStep;
@@ -334,6 +337,7 @@
 				8418D97027E168A1004C43B8 /* TimerView.swift in Sources */,
 				84D197F527E052B60083983D /* StorageProvider.swift in Sources */,
 				840FE2BB27D5D28A00B574C4 /* Breathwork_Pacer.xcdatamodeld in Sources */,
+				84DD8FFD27ED66B600F3DFD8 /* AddStep.swift in Sources */,
 				8418D97427E18C8D004C43B8 /* Workout.swift in Sources */,
 				846B990427E00E1A009367F6 /* BreathSet+CoreDataClass.swift in Sources */,
 				840FE2B127D5D28A00B574C4 /* CoreDataBoilerPlateView.swift in Sources */,

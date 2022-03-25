@@ -77,11 +77,11 @@ struct EditStepsView: View {
     }
     
     private func delete(at offsets:IndexSet) {
-        model.delete(fromOffsets: offsets, steps: steps)
+        model.deleteSteps(fromOffsets: offsets, steps: steps)
     }
     
     private func moveStep(at offsets:IndexSet, destination:Int) {
-        model.move(from: offsets, destination: destination, steps: steps)
+        model.moveSteps(from: offsets, destination: destination, steps: steps)
     }
     
     @ViewBuilder
@@ -90,7 +90,7 @@ struct EditStepsView: View {
         let stepType = BreathStepType.stepTypeForString(step.type)
         let view = BreathStepView(stepType: stepType,
                                   duration: Double(step.duration),
-                                  breathStepId: step.id,
+                                  breathStepId: step.id!,
                                   parentIsEditing: (editMode == .active),
                                   sortOrder: step.sortOrder)
         

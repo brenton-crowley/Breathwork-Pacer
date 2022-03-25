@@ -16,7 +16,7 @@ extension BreathSet {
         return NSFetchRequest<BreathSet>(entityName: "BreathSet")
     }
 
-    @NSManaged public var id: UUID
+    @NSManaged public var id: UUID? // might need to be an optional for when we delete it from the store.
     @NSManaged public var title: String
     @NSManaged public var sortOrder: Int
     @NSManaged public var steps: NSSet?

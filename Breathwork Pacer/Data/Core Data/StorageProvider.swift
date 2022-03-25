@@ -217,6 +217,11 @@ extension StorageProvider {
     
     func deleteBreathSet( _ breathSet: BreathSet) {
         
+        if let s = breathSet.steps  {
+            let steps = s.allObjects as! [BreathStep]
+            steps.forEach { deleteStep($0) }
+        }
+        
         persistentContainer.viewContext.delete(breathSet)
         
         do {
@@ -327,7 +332,7 @@ extension StorageProvider {
     }
     
     func deleteStep(_ step:BreathStep) {
-        
+
         persistentContainer.viewContext.delete(step)
         
         do {

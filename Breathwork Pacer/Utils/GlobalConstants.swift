@@ -22,4 +22,7 @@ struct GlobalConstants {
     // MARK: - WorkoutViewModel
     static let timerDelay = 0.1
     
+    // MARK: - BreathStepView
+    static let breathStepLabelColour = "labelColour"
+    
 }

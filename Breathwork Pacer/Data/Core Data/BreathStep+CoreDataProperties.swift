@@ -17,7 +17,7 @@ extension BreathStep {
     }
 
     @NSManaged public var duration: Double
-    @NSManaged public var id: UUID
+    @NSManaged public var id: UUID?
     @NSManaged public var sortOrder: Int
     @NSManaged public var type: String
     @NSManaged public var breathSet: BreathSet

@@ -13,11 +13,12 @@ class BreathSetsModel: ObservableObject {
     
     @Environment(\.colorScheme) static var colorScheme
     
+    @Published private(set) var breathSets:[BreathSet]?
+
     private let storageProvider:StorageProvider
     private let viewContext:NSManagedObjectContext
     private var jsonBreathSets = [BreathSetJSON]()
     private let isResetStore = false // set to true to reset the persistent store with default data. Will delete any existing data
-    @Published private(set) var breathSets:[BreathSet]?
     
     init(storageProvider:StorageProvider = StorageProvider()) {
         
@@ -59,15 +60,39 @@ class BreathSetsModel: ObservableObject {
                 UserDefaults.standard.setValue(true, forKey: GlobalConstants.dataIsPreloadedKey)
                 print("Successfully preloaded and saved data into core data store upon first run.")
                 self.fetchBreathSets()
-                print(self.breathSets!)
             }
         }
+    }
+    
+    func addBreathSetWithTitle(_ addTitleText:String, initSteps numberOfSteps:Int) {
+        
+        let title = addTitleText.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 ? "Breath Set \(breathSets?.count ?? 0)" : addTitleText
+        
+        let breathSet = BreathSet(context: storageProvider.persistentContainer.viewContext )
+        breathSet.id = UUID()
+        breathSet.title = title
+        breathSet.sortOrder = breathSets?.count ?? 0
+        
+        // init steps
+        (0..<numberOfSteps).indices.forEach {
+            let breathStep = BreathStep(context: storageProvider.persistentContainer.viewContext)
+            breathStep.id = UUID()
+            breathStep.sortOrder = $0
+            breathStep.type = BreathStepType.allCases[$0 % BreathStepType.allCases.count].rawValue
+            breathStep.duration = 3.0
+            breathSet.addToSteps(breathStep)
+            breathStep.breathSet = breathSet
+        }
+        
+        storageProvider.saveBreathSet(breathSet)
+        fetchBreathSets()
     }
     
     func fetchBreathSets() {
 
 //      will need to change this. Move to the storage provider potentially.
         self.breathSets = self.storageProvider.breathSets
+        
     }
     
     // MARK: - BreathStep Core Data Modifications
@@ -89,9 +114,9 @@ class BreathSetsModel: ObservableObject {
         }
     }
     
-    func move(from offsets: IndexSet, destination: Int, steps:[BreathStep]) {
+    func moveSteps(from offsets: IndexSet, destination: Int, steps:[BreathStep]) {
         
-        let startIndex = offsets.first!
+        let startIndex = offsets.first ?? 0
         var targetIndex = startIndex
         
         // moving from smaller to larger, set the targetIndex
@@ -118,8 +143,20 @@ class BreathSetsModel: ObservableObject {
         return a
     }
     
+    func deleteBreathSets(at offsets:IndexSet) {
+        
+        if let breathSets = breathSets, let first = offsets.first {
+            let breathSet = breathSets[first]
+            
+            storageProvider.deleteBreathSet(breathSet)
+            //fetchBreathSets()
+            
+            
+        }
+        
+    }
     
-    func delete(fromOffsets offsets: IndexSet, steps:[BreathStep]) {
+    func deleteSteps(fromOffsets offsets: IndexSet, steps:[BreathStep]) {
         
         guard steps.count > 0 else { return }
         
