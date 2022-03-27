@@ -9,6 +9,8 @@ import SwiftUI
 
 struct HomeWorkoutsListView: View {
     
+    @AppStorage("isDarkMode") private var isDarkMode = true
+    
     @EnvironmentObject private var model:BreathSetsModel
     @Environment(\.dismiss) var dismiss
     
@@ -38,7 +40,7 @@ struct HomeWorkoutsListView: View {
                                     breathWorkout
                                 } label: {
                                     Text(breathSet.title)
-                                }
+                                }.isDetailLink(false)
                             }
                             .onDelete(perform: model.deleteBreathSets)
                             
@@ -53,6 +55,17 @@ struct HomeWorkoutsListView: View {
                 }
             }
             .toolbar {
+                
+//                ToolbarItem(placement: .navigationBarLeading) {
+//                    Button {
+//                        //toggle light/dark
+//                        isDarkMode.toggle()
+//                    } label: {
+//                        let imageName = isDarkMode ? GlobalConstants.lightImage : GlobalConstants.darkImage
+//                        Image(systemName: imageName)
+//                    }
+//                }
+                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     // Add Button
                     Button { isShowingSheet.toggle()
@@ -75,7 +88,7 @@ struct HomeWorkoutsListView: View {
         VStack {
             EditStepsView(breathSet: breathSet)
             
-            NavigationLink {
+            let link = NavigationLink {
                 WorkoutView()
                     .environmentObject(WorkoutViewModel(breathSet: breathSet))
                     .navigationTitle(breathSet.title)
@@ -85,6 +98,9 @@ struct HomeWorkoutsListView: View {
                     .padding(.vertical)
                     .buttonStyle(.plain)
             }
+            link.isDetailLink(true)
+            
+                
         }
     }
     

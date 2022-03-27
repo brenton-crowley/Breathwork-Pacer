@@ -12,8 +12,18 @@ class SoundProvider {
     static let shared = SoundProvider()
     
     private var currentSound:AVAudioPlayer?
+    private var audioSession:AVAudioSession
     
-    private init() {}
+    private init() {
+        self.audioSession = AVAudioSession.sharedInstance()
+        
+        do {
+            try audioSession.setCategory(.playback)
+        } catch {
+            print(error)
+        }
+        
+    }
     
     // when the step changes, we need to know if we should play a sound
     // this logic is outside of the sound provider
@@ -36,7 +46,16 @@ class SoundProvider {
         if let newSound = newSound {
             self.stopSound()
             self.currentSound = newSound
+            activateAudioSession()
             self.currentSound?.play()
+        }
+    }
+    
+    private func activateAudioSession() {
+        do {
+            try audioSession.setActive(true)
+        } catch {
+            print(error)
         }
     }
     

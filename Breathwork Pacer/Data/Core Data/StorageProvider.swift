@@ -332,7 +332,7 @@ extension StorageProvider {
     }
     
     func deleteStep(_ step:BreathStep) {
-
+        
         persistentContainer.viewContext.delete(step)
         
         do {

@@ -38,9 +38,13 @@ struct WorkoutView: View {
             }
             .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
             .toolbar {
+                
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
                     
-                PlayControl()
-                    .aspectRatio(contentMode: .fit)
+                    PlayControl()
+                        .aspectRatio(contentMode: .fit)
+                }
+                
                 
             }
             
@@ -48,7 +52,6 @@ struct WorkoutView: View {
         .onDisappear {
             workoutModel.pauseSession()
         }
-        
     }
     
     @ViewBuilder
@@ -67,6 +70,5 @@ struct WorkoutView_Previews: PreviewProvider {
         .environmentObject(BreathSetsModel(storageProvider: StorageProvider.preview))
         .environmentObject(WorkoutViewModel(breathSet: BreathSet.example))
         .navigationBarTitleDisplayMode(.inline)
-//        .preferredColorScheme(.dark)
     }
 }

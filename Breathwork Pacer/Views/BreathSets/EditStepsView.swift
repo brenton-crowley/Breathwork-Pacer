@@ -53,6 +53,7 @@ struct EditStepsView: View {
             title
                 .font(.title)
                 .padding(.bottom)
+                
             list
         }
         
@@ -74,6 +75,7 @@ struct EditStepsView: View {
             }
             .environment(\.editMode, $editMode)
             .animation(.default, value: steps)
+            
     }
     
     private func delete(at offsets:IndexSet) {
@@ -134,7 +136,6 @@ struct EditStepsView_Previews: PreviewProvider {
             EditStepsView(breathSet: BreathSet.example)
                 .environmentObject(BreathSetsModel(storageProvider: StorageProvider.preview))
                 .preferredColorScheme(.dark)
-            
         }
     }
 }

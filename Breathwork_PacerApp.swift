@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct Breathwork_PacerApp: App {
     
+    @AppStorage("isDarkMode") private var isDarkMode = true
     @StateObject private var storageProvider = StorageProvider()
     
     var body: some Scene {
@@ -17,8 +18,8 @@ struct Breathwork_PacerApp: App {
 
             HomeWorkoutsListView()
                 .environmentObject(storageProvider)
-                .environmentObject(BreathSetsModel(storageProvider: storageProvider))
                 .preferredColorScheme(.dark)
+                .environmentObject(BreathSetsModel(storageProvider: storageProvider))
         }
     }
 }

@@ -15,6 +15,12 @@ struct GlobalConstants {
     static let defaultColorKey = "defaultColor"
     static let defaultSoundKey = "defaultSound"
     static let defaultAnimationKey = "defaultAnimation"
+    static let defaultColorScheme = "defaultColorScheme"
+    
+    static let light = "light"
+    static let dark = "dark"
+    static let lightImage = "sun.max"
+    static let darkImage = "moon"
     
     // MARK: - CoreData Models
     static let sortOrderKey = "sortOrder"
