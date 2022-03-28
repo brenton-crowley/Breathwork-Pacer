@@ -13,6 +13,8 @@ struct Breathwork_PacerApp: App {
     @AppStorage("isDarkMode") private var isDarkMode = true
     @StateObject private var storageProvider = StorageProvider()
     
+    @State private var tintColor = Settings.shared.colorFromDescription(Settings.shared.defaultColor)
+    
     var body: some Scene {
         WindowGroup {
 

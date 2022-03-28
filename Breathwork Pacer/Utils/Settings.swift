@@ -11,6 +11,7 @@ import SwiftUI
 class Settings {
     
     static let shared = Settings()
+    static let colours:[Color] = [.blue, .yellow, .red, .gray, .brown, .cyan, .green, .indigo, .mint, .orange, .pink, .purple]
     
     private(set) var defaultTimer:Int
     private(set) var defaultColor:String
@@ -19,6 +20,7 @@ class Settings {
     
     var defaultAnimationType:BreathAnimationType { return BreathAnimationType.animationTypeForString(self.defaultAnimation) }
     var defaultSoundType:SoundControlType { return SoundControlType.soundTypeForString(self.defaultSound) }
+    var defaultTint:Color { return colorFromDescription(defaultColor) }
     
     private init() {
         
@@ -63,4 +65,17 @@ class Settings {
         self.defaultSound = value
     }
     
+    func colorFromDescription(_ description:String) -> Color {
+        
+        let colorFromDescription = Settings.colours.filter { $0.description == description }
+        var color:Color
+        if let match = colorFromDescription.first {
+            color = match
+        } else {
+            color = .blue
+        }
+            
+        return color
+        
+    }
 }

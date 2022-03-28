@@ -12,7 +12,7 @@ class WorkoutViewModel: ObservableObject {
     
     @Published private(set) var workout:Workout
     
-    let colours:[Color] = [.blue, .yellow, .red, .gray, .brown, .cyan, .green, .indigo, .mint, .orange, .pink, .purple]
+    private var colours = Settings.colours
     
     private var timer = Timer()
     private var soundProvider = SoundProvider.shared
@@ -63,19 +63,7 @@ class WorkoutViewModel: ObservableObject {
     }
     
     // MARK: - Colours
-    func colorFromDescription(_ description:String) -> Color {
-        
-        let colorFromDescription = colours.filter { $0.description == description }
-        var color:Color
-        if let match = colorFromDescription.first {
-            color = match
-        } else {
-            color = .blue
-        }
-            
-        return color
-        
-    }
+    func colorFromDescription(_ description:String) -> Color { settings.colorFromDescription(description) }
     
     func changeToNextColour() {
         
