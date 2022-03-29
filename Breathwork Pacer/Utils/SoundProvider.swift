@@ -18,7 +18,7 @@ class SoundProvider {
         self.audioSession = AVAudioSession.sharedInstance()
         
         do {
-            try audioSession.setCategory(.playback)
+            try audioSession.setCategory(.ambient)
         } catch {
             print(error)
         }
