@@ -106,7 +106,7 @@ class WorkoutViewModel: ObservableObject {
         let totalElapsedSeconds = Int(self.workout.totalElapsedTime.rounded(.up))
         let numSecondsInAMinute = 60
         
-        return (totalSeconds - totalElapsedSeconds) % numSecondsInAMinute
+        return max(((totalSeconds - totalElapsedSeconds) % numSecondsInAMinute), 0)
     }
     
     func setNewTotalDurationFromMinutes(_ minutes:Int, seconds:Int) {
@@ -163,7 +163,9 @@ class WorkoutViewModel: ObservableObject {
         
         // If we're at the end of the session, stop the timer.
         if Int(self.workout.totalElapsedTime) >= self.workout.totalSecondsDuration {
-            self.timer.invalidate()
+            self.pauseSession()
+            workout.resetElapsedTime()
+            soundProvider.playSessionEndSound()
         }
     }
     

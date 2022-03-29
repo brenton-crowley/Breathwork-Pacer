@@ -178,6 +178,27 @@ class StorageProvider: ObservableObject {
 
 extension StorageProvider {
     
+    func delete<Entity:NSManagedObject>(object:Entity) {
+        
+        persistentContainer.viewContext.delete(object)
+        
+        do {
+            
+            try persistentContainer.viewContext.save()
+            
+            print("Object deleted.")
+            
+        } catch {
+            
+            persistentContainer.viewContext.rollback()
+            print("Failed to save context: \(error)")
+            
+        }
+    }
+}
+
+extension StorageProvider {
+    
     // Save new BreathSet
     func saveBreathSet(_ breathSet: BreathSet) {
         
@@ -279,7 +300,6 @@ extension StorageProvider {
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: GlobalConstants.sortOrderKey, ascending: true)]
         
         do {
-            
             // Return an array of Movie objects, retrieved from the Core Data store
             return try persistentContainer.viewContext.fetch(fetchRequest)
             

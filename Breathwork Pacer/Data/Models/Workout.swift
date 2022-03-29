@@ -9,6 +9,10 @@ import Foundation
 
 struct Workout {
     
+    private struct Constants {
+        static let scaleFactor = 1000.0
+    }
+    
     private(set) var id = UUID()
     private(set) var stepElapsedTime:Double = 0
     // TODO: - Handle for decimal amounts and change to a Double
@@ -68,14 +72,17 @@ struct Workout {
     
     // TODO: - Handle for decimal amounts
     mutating func incrementElapsedTime(amount:Double) {
-        self.totalElapsedTime += amount
-        self.stepElapsedTime += amount
+        self.totalElapsedTime = roundedDouble(self.totalElapsedTime + amount)
+        self.stepElapsedTime = roundedDouble(self.stepElapsedTime + amount)
         
         if self.stepElapsedTime >= self.currentStep.duration {
             self.stepElapsedTime = 0.0
-            
             gotoNextStep()
         }
+    }
+    
+    mutating private func roundedDouble(_ value: Double) -> Double {
+        (value * Constants.scaleFactor).rounded() / Constants.scaleFactor
     }
     
     mutating func gotoNextStep() {

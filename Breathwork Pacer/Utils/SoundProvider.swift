@@ -89,6 +89,18 @@ class SoundProvider {
         
     }
     
+    func playSessionEndSound() {
+        
+        let sound = loadSoundFromFileName(GlobalConstants.endSessionSoundGong)
+        
+        if let sound = sound {
+            self.stopSound()
+            self.currentSound = sound
+            activateAudioSession()
+            self.currentSound?.play()
+        }
+    }
+    
     private func loadSoundFromFileName(_ filename:String?) -> AVAudioPlayer? {
         
         if let filename = filename {

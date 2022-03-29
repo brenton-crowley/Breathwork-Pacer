@@ -20,7 +20,7 @@ class BreathSetsModel: ObservableObject {
     private var jsonBreathSets = [BreathSetJSON]()
     private let isResetStore = false // set to true to reset the persistent store with default data. Will delete any existing data
     
-    init(storageProvider:StorageProvider = StorageProvider()) {
+    init(storageProvider:StorageProvider = StorageProvider.preview) {
         
         self.storageProvider = storageProvider
         self.viewContext = self.storageProvider.persistentContainer.viewContext

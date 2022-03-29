@@ -31,4 +31,7 @@ struct GlobalConstants {
     // MARK: - BreathStepView
     static let breathStepLabelColour = "labelColour"
     
+    // MARK: - Sounds
+    static let endSessionSoundGong = "Gong-Sound-01"
+    
 }

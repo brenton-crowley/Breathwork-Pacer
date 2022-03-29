@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21D62" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E230" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="BreathSet" representedClassName="BreathSet" syncable="YES">
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="sortOrder" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="title" attributeType="String"/>
-        <relationship name="steps" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="BreathStep" inverseName="breathSet" inverseEntity="BreathStep"/>
+        <relationship name="steps" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="BreathStep" inverseName="breathSet" inverseEntity="BreathStep"/>
     </entity>
     <entity name="BreathStep" representedClassName="BreathStep" syncable="YES">
         <attribute name="duration" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
@@ -17,8 +17,8 @@
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
     <elements>
+        <element name="BreathSet" positionX="-63" positionY="18" width="128" height="89"/>
         <element name="BreathStep" positionX="-63" positionY="-9" width="128" height="104"/>
         <element name="Item" positionX="-63" positionY="-18" width="128" height="44"/>
-        <element name="BreathSet" positionX="-63" positionY="18" width="128" height="89"/>
     </elements>
 </model>
