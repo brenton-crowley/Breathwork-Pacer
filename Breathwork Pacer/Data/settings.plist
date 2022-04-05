@@ -7,7 +7,7 @@
 	<key>defaultAnimation</key>
 	<string>circleAnimation</string>
 	<key>defaultColor</key>
-	<string>blue</string>
+	<string>orange</string>
 	<key>defaultSound</key>
 	<string>none</string>
 </dict>

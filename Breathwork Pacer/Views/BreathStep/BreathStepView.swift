@@ -24,7 +24,16 @@ struct BreathStepView: View {
         
         // Opacity
         static let opaque:CGFloat = 1
+        static let medium:CGFloat = 0.5
         static let transparent:CGFloat = 0
+        
+        // Scale
+        static let noBlur:CGFloat = 0.0
+        static let blurValue:CGFloat = 8.0
+        
+        // Scale
+        static let displayedScale:CGFloat = 1.0
+        static let hiddenScale:CGFloat = 0.0
         
         // EditView
         static let offsetValue:CGFloat = 40
@@ -66,12 +75,16 @@ struct BreathStepView: View {
                 // Build both views but only display
                 editingView
                     .opacity(isFocused ? Constants.opaque : Constants.transparent)
-                    .offset(y: isFocused ? Constants.activeValue : -Constants.offsetValue)
+//                    .offset(y: isFocused ? Constants.activeValue : -Constants.offsetValue)
+                    .scaleEffect(x: isFocused ? Constants.displayedScale : Constants.hiddenScale,
+                                 y: isFocused ? Constants.displayedScale : Constants.hiddenScale,
+                                 anchor: .center)
                     .padding(.horizontal)
                 
                 displayView
-                    .opacity(isFocused ? Constants.transparent : Constants.opaque)
-                    .offset(y: isFocused ? Constants.offsetValue : Constants.activeValue)
+                    .opacity(isFocused ? Constants.medium : Constants.opaque)
+//                    .offset(y: isFocused ? Constants.offsetValue : Constants.activeValue)
+                    .blur(radius: isFocused ? Constants.blurValue : Constants.noBlur)
                     .foregroundColor(BreathSetsModel.colorScheme == .light ? .white : .black)
             }
             .padding(.horizontal)
@@ -182,6 +195,7 @@ struct BreathStepView: View {
                 .onChange(of: duration) { newValue in
                     home.updateBreathStepDurationTo(duration, forID: breathStepId)
                 }
+                .animation(.default, value: durationIsFocused)
         }
         
     }

@@ -51,7 +51,8 @@ struct EditStepsView: View {
             }
             
             title
-                .font(.title)
+                .font(.system(.title, design: .rounded))
+                .fontWeight(.bold)
                 .padding(.bottom)
                 
             list

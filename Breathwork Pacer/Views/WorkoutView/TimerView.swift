@@ -56,6 +56,12 @@ struct TimerView:View {
             
             let minutesPicker = timePicker(labelText: "Minutes", range: Constants.timeRange, value: $minutes)
             let secondsPicker = timePicker(labelText: "Seconds", range: Constants.timeRange, value: $seconds)
+            let cancelButton = timePickerButton(systemImageName: "xmark.circle") {
+                withAnimation {
+                    isEditing = false
+                }
+            }
+            
             let doneButton = timePickerButton(systemImageName: "checkmark.circle") {
                 withAnimation {
                     isEditing = false
@@ -65,13 +71,17 @@ struct TimerView:View {
             
             // View Builder Stack
             minutesPicker
-            Text(" minutes : ")
+            Text(" minutes")
                 .font(.caption)
             
             secondsPicker
             Text(" seconds")
                 .font(.caption)
-            doneButton
+            VStack {
+                doneButton
+                Spacer()
+                cancelButton
+            }
             
         }
         

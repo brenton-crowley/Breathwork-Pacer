@@ -113,7 +113,7 @@ class WorkoutViewModel: ObservableObject {
         
         let totalSeconds = minutes * 60 + seconds
         settings.saveDefaultTimerTo(totalSeconds)
-        self.workout.resetElapsedTime()
+        self.workout.resetWorkout()
     }
     
     func saveDefaultTimerDuration(_ minutes:Int, _ seconds:Int) {
@@ -164,7 +164,7 @@ class WorkoutViewModel: ObservableObject {
         // If we're at the end of the session, stop the timer.
         if Int(self.workout.totalElapsedTime) >= self.workout.totalSecondsDuration {
             self.pauseSession()
-            workout.resetElapsedTime()
+            workout.resetWorkout()
             soundProvider.playSessionEndSound()
         }
     }
