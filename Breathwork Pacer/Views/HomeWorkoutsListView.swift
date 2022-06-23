@@ -71,7 +71,9 @@ struct HomeWorkoutsListView: View {
                     Button { isShowingSheet.toggle()
                     } label: { Image(systemName: "plus") }
                     .sheet(isPresented: $isShowingSheet) {
+                        
                         AddStep(isShowingSheet: $isShowingSheet)
+                            
                     }
 
                 }

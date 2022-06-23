@@ -44,6 +44,7 @@
 		84EC1F2827E41CC300C4AE63 /* high-piano-note.wav in Resources */ = {isa = PBXBuildFile; fileRef = 84EC1F2727E41CC300C4AE63 /* high-piano-note.wav */; };
 		84EC1F2A27E4419D00C4AE63 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EC1F2927E4419D00C4AE63 /* Settings.swift */; };
 		84EC1F2C27E4506600C4AE63 /* settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84EC1F2B27E4506500C4AE63 /* settings.plist */; };
+		84EC7AFD28643CE300DA8093 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84EC7AFC28643CE300DA8093 /* Launch Screen.storyboard */; };
 		84F90BFB27F29B41008875AB /* Gong-Sound-01.wav in Resources */ = {isa = PBXBuildFile; fileRef = 84F90BFA27F29B41008875AB /* Gong-Sound-01.wav */; };
 		84F90BFD27F29D51008875AB /* Gong-Sound-02.wav in Resources */ = {isa = PBXBuildFile; fileRef = 84F90BFC27F29D51008875AB /* Gong-Sound-02.wav */; };
 /* End PBXBuildFile section */
@@ -88,6 +89,7 @@
 		84EC1F2727E41CC300C4AE63 /* high-piano-note.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "high-piano-note.wav"; path = "Breathwork Pacer/Sounds/high-piano-note.wav"; sourceTree = SOURCE_ROOT; };
 		84EC1F2927E4419D00C4AE63 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		84EC1F2B27E4506500C4AE63 /* settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = settings.plist; sourceTree = "<group>"; };
+		84EC7AFC28643CE300DA8093 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		84F90BFA27F29B41008875AB /* Gong-Sound-01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "Gong-Sound-01.wav"; path = "Breathwork Pacer/Sounds/Gong-Sound-01.wav"; sourceTree = SOURCE_ROOT; };
 		84F90BFC27F29D51008875AB /* Gong-Sound-02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "Gong-Sound-02.wav"; path = "Breathwork Pacer/Sounds/Gong-Sound-02.wav"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -166,6 +168,7 @@
 		840FE2C327D5D29C00B574C4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				84EC7AFC28643CE300DA8093 /* Launch Screen.storyboard */,
 				846B98F127DFFAC0009367F6 /* HomeWorkoutsListView.swift */,
 				846B98F027DFFAB2009367F6 /* BreathSets */,
 				848EFBC327D7217B00F1D243 /* BreathStep */,
@@ -324,6 +327,7 @@
 				84F90BFD27F29D51008875AB /* Gong-Sound-02.wav in Resources */,
 				84EC1F2527E41B2D00C4AE63 /* yoga-inhale.wav in Resources */,
 				84EC1F2427E41B2D00C4AE63 /* male-breath-in.wav in Resources */,
+				84EC7AFD28643CE300DA8093 /* Launch Screen.storyboard in Resources */,
 				840FE2B627D5D28A00B574C4 /* Preview Assets.xcassets in Resources */,
 				84F90BFB27F29B41008875AB /* Gong-Sound-01.wav in Resources */,
 				84EC1F2627E41B2D00C4AE63 /* low-piano-note.wav in Resources */,
@@ -505,6 +509,8 @@
 				INFOPLIST_FILE = "Breathwork-Pacer-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -512,11 +518,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "training.franklin.dev.Breathwork-Pacer";
+				PRODUCT_BUNDLE_IDENTIFIER = training.franklin.dev.BreathworkPacer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -534,6 +540,8 @@
 				INFOPLIST_FILE = "Breathwork-Pacer-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -541,11 +549,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "training.franklin.dev.Breathwork-Pacer";
+				PRODUCT_BUNDLE_IDENTIFIER = training.franklin.dev.BreathworkPacer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
