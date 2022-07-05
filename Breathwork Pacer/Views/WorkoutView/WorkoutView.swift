@@ -9,66 +9,84 @@ import SwiftUI
 
 struct WorkoutView: View {
     
+    
+    
     // Fetch request of settings
+    @Environment(\.scenePhase) var scenePhase
     
-    @EnvironmentObject var workoutModel:WorkoutViewModel
-    
-    var breathSet:BreathSet { workoutModel.workout.breathSet }
+    var breaths:BreathSet
+    @State var workoutModel:WorkoutViewModel?
+    var breathSet:BreathSet? {
+        
+        guard let workoutModel = workoutModel else {
+            return nil
+        }
+        
+        return workoutModel.workout.breathSet
+    }
     
     var body: some View {
         
-        GeometryReader { geo in
-            // VStack
-            VStack (alignment: .center, spacing: 0) {
-                
-                // Timer
-                TimerView(minutes: workoutModel.getCountdownMinutes(), seconds: workoutModel.getCountdownSeconds())
-                    .padding(.vertical)
-                Text(workoutModel.getStepActionText())
-                // Animation - TabView as page with different animations that can be swiped
-                BreathAnimationPageView(selectedAnimation: workoutModel.workout.animationType)
-                    .frame(width: geo.size.width * 0.5, height: geo.size.height * 0.5)
-                    .padding(.bottom)
-                // Play/Pause Controls
-                
-                // Segmented control of sounds
-                SoundControl()
-                    .padding(.vertical)
-                
-            }
-            .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-            .toolbar {
-                
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
+        VStack {
+            if let workoutModel = workoutModel {
+                GeometryReader { geo in
+                    // VStack
+                    VStack (alignment: .center, spacing: 0) {
+                        
+                        // Timer
+                        TimerView(minutes: workoutModel.getCountdownMinutes(), seconds: workoutModel.getCountdownSeconds())
+                            .padding(.vertical)
+                        Text(workoutModel.getStepActionText())
+                        // Animation - TabView as page with different animations that can be swiped
+                        BreathAnimationPageView(selectedAnimation: workoutModel.workout.animationType)
+                            .frame(width: geo.size.width * 0.5, height: geo.size.height * 0.5)
+                            .padding(.bottom)
+                        // Play/Pause Controls
+                        
+                        // Segmented control of sounds
+                        SoundControl()
+                            .padding(.vertical)
+                        
+                    }
+                    .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+                    .toolbar {
+                        
+                        ToolbarItemGroup(placement: .navigationBarTrailing) {
+                            
+                            PlayControl()
+                                .aspectRatio(contentMode: .fit)
+                        }
+                        
+                        
+                    }
                     
-                    PlayControl()
-                        .aspectRatio(contentMode: .fit)
                 }
-                
-                
+                .onDisappear {
+                    print("onDisappear in Workout View")
+                    workoutModel.pauseSession()
+                }
+                .onChange(of: scenePhase) { newPhase in
+                    workoutModel.setNewScenePhase(newPhase)
+                }
+                .environmentObject(workoutModel)
+            } else {
+                EmptyView()
             }
             
         }
-        .onDisappear {
-            workoutModel.pauseSession()
+        .onAppear {
+            self.workoutModel = WorkoutViewModel(breathSet: breaths)
         }
     }
-    
-    @ViewBuilder
-    private func timerView() -> some View {
-        
-    }
-    
 }
 
 struct WorkoutView_Previews: PreviewProvider {
     static var previews: some View {
         
         NavigationView {
-            WorkoutView()
+            WorkoutView(breaths: BreathSet.example)
         }
         .environmentObject(BreathSetsModel(storageProvider: StorageProvider.preview))
-        .environmentObject(WorkoutViewModel(breathSet: BreathSet.example))
         .navigationBarTitleDisplayMode(.inline)
     }
 }

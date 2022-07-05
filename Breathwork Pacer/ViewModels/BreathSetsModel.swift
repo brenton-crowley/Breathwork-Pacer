@@ -14,7 +14,7 @@ class BreathSetsModel: ObservableObject {
     @Environment(\.colorScheme) static var colorScheme
     
     @Published private(set) var breathSets:[BreathSet]?
-
+    
     private let storageProvider:StorageProvider
     private let viewContext:NSManagedObjectContext
     private var jsonBreathSets = [BreathSetJSON]()

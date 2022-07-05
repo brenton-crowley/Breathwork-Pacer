@@ -81,6 +81,7 @@ struct HomeWorkoutsListView: View {
             
             
         }
+        .navigationViewStyle(.stack)
         
     }
     
@@ -91,8 +92,7 @@ struct HomeWorkoutsListView: View {
             EditStepsView(breathSet: breathSet)
             
             let link = NavigationLink {
-                WorkoutView()
-                    .environmentObject(WorkoutViewModel(breathSet: breathSet))
+                WorkoutView(breaths: breathSet)
                     .navigationTitle(breathSet.title)
             } label: {
                 Label("Go to Session", systemImage: "clock")

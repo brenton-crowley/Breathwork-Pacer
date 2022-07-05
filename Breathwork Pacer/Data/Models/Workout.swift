@@ -108,6 +108,7 @@ struct Workout {
         self.totalElapsedTime = 0
         self.stepElapsedTime = 0
         self.currentStepIndex = 0
+        print("reset workout")
     }
     
     mutating func changeSoundTypeTo(_ selectedSoundType:SoundControlType) {
