@@ -62,7 +62,6 @@ struct WorkoutView: View {
                     
                 }
                 .onDisappear {
-                    print("onDisappear in Workout View")
                     workoutModel.pauseSession()
                 }
                 .onChange(of: scenePhase) { newPhase in

@@ -81,17 +81,17 @@
 		84D197F627E059430083983D /* BreathSet+PreviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "BreathSet+PreviewProvider.swift"; path = "Breathwork Pacer/Data/Core Data/BreathSet+PreviewProvider.swift"; sourceTree = SOURCE_ROOT; };
 		84DD8FFC27ED66B600F3DFD8 /* AddStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStep.swift; sourceTree = "<group>"; };
 		84EC1EF727E3FD5800C4AE63 /* SoundProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundProvider.swift; sourceTree = "<group>"; };
-		84EC1F1B27E41B2D00C4AE63 /* male-breath-out.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "male-breath-out.wav"; path = "Breathwork Pacer/Sounds/male-breath-out.wav"; sourceTree = SOURCE_ROOT; };
-		84EC1F1C27E41B2D00C4AE63 /* yoga-exhale.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "yoga-exhale.wav"; path = "Breathwork Pacer/Sounds/yoga-exhale.wav"; sourceTree = SOURCE_ROOT; };
-		84EC1F1E27E41B2D00C4AE63 /* male-breath-in.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "male-breath-in.wav"; path = "Breathwork Pacer/Sounds/male-breath-in.wav"; sourceTree = SOURCE_ROOT; };
-		84EC1F1F27E41B2D00C4AE63 /* yoga-inhale.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "yoga-inhale.wav"; path = "Breathwork Pacer/Sounds/yoga-inhale.wav"; sourceTree = SOURCE_ROOT; };
-		84EC1F2027E41B2D00C4AE63 /* low-piano-note.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "low-piano-note.wav"; path = "Breathwork Pacer/Sounds/low-piano-note.wav"; sourceTree = SOURCE_ROOT; };
-		84EC1F2727E41CC300C4AE63 /* high-piano-note.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "high-piano-note.wav"; path = "Breathwork Pacer/Sounds/high-piano-note.wav"; sourceTree = SOURCE_ROOT; };
+		84EC1F1B27E41B2D00C4AE63 /* male-breath-out.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "male-breath-out.wav"; path = "Breathwork Pacer/Audio/male-breath-out.wav"; sourceTree = SOURCE_ROOT; };
+		84EC1F1C27E41B2D00C4AE63 /* yoga-exhale.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "yoga-exhale.wav"; path = "Breathwork Pacer/Audio/yoga-exhale.wav"; sourceTree = SOURCE_ROOT; };
+		84EC1F1E27E41B2D00C4AE63 /* male-breath-in.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "male-breath-in.wav"; path = "Breathwork Pacer/Audio/male-breath-in.wav"; sourceTree = SOURCE_ROOT; };
+		84EC1F1F27E41B2D00C4AE63 /* yoga-inhale.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "yoga-inhale.wav"; path = "Breathwork Pacer/Audio/yoga-inhale.wav"; sourceTree = SOURCE_ROOT; };
+		84EC1F2027E41B2D00C4AE63 /* low-piano-note.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "low-piano-note.wav"; path = "Breathwork Pacer/Audio/low-piano-note.wav"; sourceTree = SOURCE_ROOT; };
+		84EC1F2727E41CC300C4AE63 /* high-piano-note.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "high-piano-note.wav"; path = "Breathwork Pacer/Audio/high-piano-note.wav"; sourceTree = SOURCE_ROOT; };
 		84EC1F2927E4419D00C4AE63 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		84EC1F2B27E4506500C4AE63 /* settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = settings.plist; sourceTree = "<group>"; };
 		84EC7AFC28643CE300DA8093 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		84F90BFA27F29B41008875AB /* Gong-Sound-01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "Gong-Sound-01.wav"; path = "Breathwork Pacer/Sounds/Gong-Sound-01.wav"; sourceTree = SOURCE_ROOT; };
-		84F90BFC27F29D51008875AB /* Gong-Sound-02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "Gong-Sound-02.wav"; path = "Breathwork Pacer/Sounds/Gong-Sound-02.wav"; sourceTree = SOURCE_ROOT; };
+		84F90BFA27F29B41008875AB /* Gong-Sound-01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "Gong-Sound-01.wav"; path = "Breathwork Pacer/Audio/Gong-Sound-01.wav"; sourceTree = SOURCE_ROOT; };
+		84F90BFC27F29D51008875AB /* Gong-Sound-02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "Gong-Sound-02.wav"; path = "Breathwork Pacer/Audio/Gong-Sound-02.wav"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +105,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7DE1B65D2873F0AD00F6163D /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				84F90BFA27F29B41008875AB /* Gong-Sound-01.wav */,
+				84F90BFC27F29D51008875AB /* Gong-Sound-02.wav */,
+				84EC1F2727E41CC300C4AE63 /* high-piano-note.wav */,
+				84EC1F2027E41B2D00C4AE63 /* low-piano-note.wav */,
+				84EC1F1E27E41B2D00C4AE63 /* male-breath-in.wav */,
+				84EC1F1B27E41B2D00C4AE63 /* male-breath-out.wav */,
+				84EC1F1C27E41B2D00C4AE63 /* yoga-exhale.wav */,
+				84EC1F1F27E41B2D00C4AE63 /* yoga-inhale.wav */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
 		840FE2A227D5D28A00B574C4 = {
 			isa = PBXGroup;
 			children = (
@@ -125,8 +140,8 @@
 		840FE2AD27D5D28A00B574C4 /* Breathwork Pacer */ = {
 			isa = PBXGroup;
 			children = (
+				7DE1B65D2873F0AD00F6163D /* Audio */,
 				845D2FB927E94555005FB91C /* Breathwork-Pacer-Info.plist */,
-				84EC1F1A27E41AFB00C4AE63 /* Audio */,
 				840FE2B227D5D28A00B574C4 /* Assets.xcassets */,
 				840FE2C127D5D29400B574C4 /* Data */,
 				840FE2B427D5D28A00B574C4 /* Preview Content */,
@@ -248,21 +263,6 @@
 				848EFBC427D7218800F1D243 /* BreathStepView.swift */,
 			);
 			path = BreathStep;
-			sourceTree = "<group>";
-		};
-		84EC1F1A27E41AFB00C4AE63 /* Audio */ = {
-			isa = PBXGroup;
-			children = (
-				84F90BFA27F29B41008875AB /* Gong-Sound-01.wav */,
-				84F90BFC27F29D51008875AB /* Gong-Sound-02.wav */,
-				84EC1F2727E41CC300C4AE63 /* high-piano-note.wav */,
-				84EC1F2027E41B2D00C4AE63 /* low-piano-note.wav */,
-				84EC1F1E27E41B2D00C4AE63 /* male-breath-in.wav */,
-				84EC1F1B27E41B2D00C4AE63 /* male-breath-out.wav */,
-				84EC1F1C27E41B2D00C4AE63 /* yoga-exhale.wav */,
-				84EC1F1F27E41B2D00C4AE63 /* yoga-inhale.wav */,
-			);
-			path = Audio;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -534,11 +534,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1.0.1.1;
 				DEVELOPMENT_ASSET_PATHS = "\"Breathwork Pacer/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 5R23NM6B64;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Breathwork-Pacer-Info.plist";
@@ -556,7 +556,7 @@
 				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = training.franklin.BreathworkPacer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Breathwork Pacer (Franklin)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

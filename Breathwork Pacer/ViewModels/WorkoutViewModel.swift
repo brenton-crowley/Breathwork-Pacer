@@ -34,20 +34,15 @@ class WorkoutViewModel: ObservableObject {
                                animationColor: settings.defaultColor,
                                soundControlType: settings.defaultSoundType,
                                animationType: settings.defaultAnimationType)
-        print("new workout created")
     }
     
     // MARK: - Background Mode
     func setNewScenePhase(_ newPhase:ScenePhase) {
         
         switch newPhase {
-        case .active:
-            print("active")
         case .background:
-            print("background")
             fallthrough
         case .inactive:
-            print("background")
             pauseSession()
         default:
             return
